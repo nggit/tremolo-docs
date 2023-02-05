@@ -1,8 +1,8 @@
-title: Just the Docs Template
-description: A starter template for a Jeykll site using the Just the Docs theme!
+title: Tremolo
+description: Tremolo is a stream-oriented, asynchronous web server/framework written in pure Python
 theme: just-the-docs
 
-url: https://just-the-docs.github.io
+url: https://nggit.github.io/tremolo-docs
 
-aux_links:
-  Template Repository: https://github.com/just-the-docs/just-the-docs-template
+aux_links: # remove if you don't want this link to appear on your pages
+  Template Repository: https://nggit.github.io/tremolo-docs
