@@ -19,7 +19,7 @@ async def hello_world(**server):
 ```
 
 ## Regular expression
-To be recognized as a string regex, at least the path must start with `^` or end with `$` character.
+To be recognized as a regex string, at least the path must start with `^` or end with `$` character.
 
 The following will match for example with http://example.com/page/12, http://example.com/page/101, and so on.
 
@@ -27,7 +27,7 @@ The following will match for example with http://example.com/page/12, http://exa
 @app.route(r'^/page/(?P<page_id>\d+)')
 async def my_page(**server):
     request = server['request']
-    page_id = request.params['url'].get('page_id')
+    page_id = request.params['url'].get('page_id', b'')
 
     """Tremolo often uses bytes-like objects as is,
     rather than converting to str or int.
@@ -36,7 +36,6 @@ async def my_page(**server):
     yield b'You are on page ' + page_id
 ```
 
-The regex syntax above uses *named groups* which you can learn more about at https://docs.python.org/3/library/re.html#re.Match.groupdict
+The regex syntax above uses *named groups* which you can learn more about at [https://docs.python.org/3/library/re.html#re.Match.groupdict](https://docs.python.org/3/library/re.html#re.Match.groupdict)
 
-You can always check what kind of data is received if using regex in the following variable
-`request.params['url']`.
+You can always check what kind of data is received if using regex in `request.params['url']`. It's a dict object.
