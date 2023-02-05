@@ -1,3 +1,7 @@
+---
+layout: page
+title: About
+---
 
 ```python
 @app.route('/hello')
