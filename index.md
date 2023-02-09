@@ -1,6 +1,7 @@
 ---
-title: About
 layout: home
+nav_order: 1
+title: About
 ---
 
 Tremolo is a stream-oriented, asynchronous web server/framework written in pure Python. Tremolo provides a common routing functionality to some unique features such as download/upload speed limiters, etc. While maintaining its simplicity and performance.
