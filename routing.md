@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Routes
+title: Routing
 ---
 
 Tremolo has no difficult abstractions, and never will. You don't need to learn a lot of trivial things. All you need to learn is Python.
