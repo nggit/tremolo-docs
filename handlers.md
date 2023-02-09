@@ -34,7 +34,7 @@ In addition to the options above, you can even define your own options, and they
 
 ```python
 @app.route('/hello')
-async def hello_world(chunked=False, rate=2097152, buffer_size=65536, **server):
+async def hello_world(a=1, rate=2097152, buffer_size=65536, **server):
     print(server['options'])
 
     yield b'Hello'
