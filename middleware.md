@@ -33,9 +33,7 @@ Hello World!
 ```
 
 ## Middleware in action
-Tremolo by default does not restrict any request methods. It supports arbitrary request methods.
-
-You can halt for example if the received request method is neither `GET` nor `POST`:
+As Tremolo supports arbitrary request methods, You can halt for example if the received request method is neither `GET` nor `POST`:
 ```python
 @app.on_request
 async def my_request_middleware(**server):
