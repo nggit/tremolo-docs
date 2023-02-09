@@ -33,6 +33,8 @@ Hello World!
 ```
 
 ## Middleware in action
+Tremolo by default does not restrict any request methods. It supports arbitrary request methods.
+
 You can halt for example if the received request method is neither `GET` nor `POST`:
 ```python
 @app.on_request
@@ -93,4 +95,4 @@ Here is a `print` result of the data before it is sent to the client in the form
 ('data', None)
 ```
 
-Since the `on_data` handler may be called multiple times, the `name` field is handy to tell if it is `header` or `body` data.
+Since the `on_data` handler may be called multiple times, the `name` field is handy to tell if it is `header` or `body` part.
