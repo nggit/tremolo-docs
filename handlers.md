@@ -17,7 +17,7 @@ Each handler is required to accept a *keyword arguments* in this case `**server`
 
 `server` is a dict object, which contains other objects that are often needed, such as `server['request']` which is an `HTTPRequest` object, and `server['response']` which is an `HTTPResponse` object.
 
-Before `**server`, you can provide some options to fine tune the handler such as `chunked`, `rate`, `buffer_size`, etc.
+Before the `**server`, you can provide some options to fine tune the handler such as `chunked`, `rate`, `buffer_size`, etc.
 
 ```python
 @app.route('/hello')
@@ -28,7 +28,7 @@ async def hello_world(chunked=False, rate=2097152, buffer_size=65536, **server):
 
 * *chunked=False* will disable chunked HTTP responses, the default is automatically adjusted for clients.
 * *rate* 2MiB/s is the download speed limit for each client. This is useful for limiting bandwidth usage as well as mitigating bandwidth hogs.
-* *buffer_size* is the maximum size of data that must be sent to the client immediately. although in Tremolo it more accurately means "the maximum size of an individual chunk". For example, no matter how large a buffer you set for reading a file, Tremolo may divide it according to the `buffer_size` on each transmission.
+* *buffer_size* is the maximum size of data that must be sent to the client immediately. although in Tremolo it more accurately means "the maximum size of an individual chunk". Because no matter how large a buffer you set for reading a file, Tremolo may divide it according to the `buffer_size` on each transmission.
 
 In addition to the options above, you can even define your own options, and they will magically become available in `server['options']`.
 
