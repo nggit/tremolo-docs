@@ -1,30 +1,86 @@
 ---
-title: Home
-layout: home
+title: About
+layout: About
 ---
 
-This is a *bare-minimum* template to create a Jekyll site that uses the [Just the Docs] theme. You can easily set the created site to be published on [GitHub Pages] – the [README] file explains how to do that, along with other details.
+Tremolo is a stream-oriented, asynchronous web server/framework written in pure Python. Tremolo provides a common routing functionality to some unique features such as download/upload speed limiters, etc. While maintaining its simplicity and performance.
 
-If [Jekyll] is installed on your computer, you can also build and preview the created site *locally*. This lets you test changes before committing them, and avoids waiting for GitHub Pages.[^1] And you will be able to deploy your local build to a different platform than GitHub Pages.
+Being built with a stream in mind, Tremolo tends to use `yield` instead of `return` in route handlers.
 
-More specifically, the created site:
+```python
+@app.route('/hello')
+async def hello_world(**server):
+    yield b'Hello '
+    yield b'world!'
+```
 
-- uses a gem-based approach, i.e. uses a `Gemfile` and loads the `just-the-docs` gem
-- uses the [GitHub Pages / Actions workflow] to build and publish the site on GitHub Pages
+You can take advantage of this to serve files efficiently:
 
-Other than that, you're free to customize sites that you create with this template, however you like. You can easily change the versions of `just-the-docs` and Jekyll it uses, as well as adding further plugins.
+```python
+@app.route('/my/url/big.data')
+async def my_movie(content_type='application/octet-stream', **server):
+    with open('/my/folder/big.data', 'rb') as f:
+        chunk = True
 
-[Browse our documentation][Just the Docs] to learn more about how to use this theme.
+        while chunk:
+            chunk = f.read(server['options']['buffer_size'])
+            yield chunk
+```
 
-To get started with creating a site, just click "[use this template]"!
+And many different cases...
 
-----
+## Example
+Here is a complete *hello world* example in case you missed the usual `return`.
 
-[^1]: [It can take up to 10 minutes for changes to your site to publish after you push the changes to GitHub](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/creating-a-github-pages-site-with-jekyll#creating-your-site).
+```python
+from tremolo import Tremolo
 
-[Just the Docs]: https://just-the-docs.github.io/just-the-docs/
-[GitHub Pages]: https://docs.github.com/en/pages
-[README]: https://github.com/just-the-docs/just-the-docs-template/blob/main/README.md
-[Jekyll]: https://jekyllrb.com
-[GitHub Pages / Actions workflow]: https://github.blog/changelog/2022-07-27-github-pages-custom-github-actions-workflows-beta/
-[use this template]: https://github.com/just-the-docs/just-the-docs-template/generate
+app = Tremolo()
+
+@app.route('/hello')
+async def hello_world(**server):
+    return 'Hello world!', 'latin-1'
+
+if __name__ == '__main__':
+    app.run('0.0.0.0', 8000)
+```
+
+Well, `latin-1` on the right side is not required. The default is `utf-8`.
+
+You can save it as `hello.py` and just run it with `python3 hello.py`.
+
+Your first *hello world* page with Tremolo will be at http://localhost:8000/hello.
+
+## Misc
+Tremolo utilizes `SO_REUSEPORT` (Linux 3.9+) to load balance worker processes.
+
+```python
+app.run('0.0.0.0', 8000, worker_num=2)
+```
+
+Tremolo can also listen to multiple ports in case you are using an external load balancer like Nginx / HAProxy.
+
+```python
+app.add_listener(8001)
+app.add_listener(8002)
+
+app.run('0.0.0.0', 8000)
+```
+
+You can even get higher concurrency with [uvloop](https://magic.io/blog/uvloop-blazing-fast-python-networking/):
+
+```python
+import asyncio
+import uvloop
+asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
+```
+
+## Installing
+Tremolo is still in the early stages of development. But you can try installing it if you like.
+
+```
+python3 -m pip install tremolo
+```
+
+## License
+MIT
