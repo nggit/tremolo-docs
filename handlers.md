@@ -15,7 +15,7 @@ async def hello_world(**server):
 
 Each handler is required to accept a *keyword arguments* in this case `**server`. Although the name does not have to be `server`, for example `**kwargs`.
 
-`server` is a dict object, which contains other objects that are often needed, such as `server['request']` which is an `HTTPRequest` object, and `server['response']` which is an `HTTPResponse` object.
+`server` is a dict object, which contains other objects that are often needed, such as `server['request']` which is an [HTTPRequest](https://nggit.github.io/tremolo-docs/request.html) object, and `server['response']` which is an [HTTPResponse](https://nggit.github.io/tremolo-docs/response.html) object.
 
 Before the `**server`, you can provide some options to fine tune the handler such as `chunked`, `rate`, `buffer_size`, etc.
 
