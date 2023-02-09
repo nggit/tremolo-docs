@@ -26,9 +26,9 @@ async def hello_world(chunked=False, rate=2097152, buffer_size=65536, **server):
     yield b'World!'
 ```
 
-* **chunked=False** will disable chunked HTTP responses, the default is automatically adjusted for clients.
-* **rate** 2MiB/s is the download speed limit for each client. This is useful for limiting bandwidth usage as well as mitigating bandwidth hogs.
-* **buffer_size** is the maximum data size that must be sent to the client immediately.
+* *chunked=False* will disable chunked HTTP responses, the default is automatically adjusted for clients.
+* *rate* 2MiB/s is the download speed limit for each client. This is useful for limiting bandwidth usage as well as mitigating bandwidth hogs.
+* *buffer_size* is the maximum data size that must be sent to the client immediately.
 
 In addition to the options above, you can even define your own options, and they will magically become available in `server['options']`.
 
