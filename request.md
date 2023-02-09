@@ -4,7 +4,7 @@ nav_order: 4
 title: Request Object
 ---
 
-`server['request']` is basically an instantiation [HTTPRequest](https://github.com/nggit/tremolo/blob/master/tremolo/lib/http_request.py)
+`server['request']` is basically an instantiation of [HTTPRequest](https://github.com/nggit/tremolo/blob/master/tremolo/lib/http_request.py).
 
 Here are some of available objects:
 
