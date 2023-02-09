@@ -27,7 +27,7 @@ async def my_big_data(content_type='application/octet-stream', **server):
             yield chunk
 ```
 
-And many different cases...
+And other use cases...
 
 ## Example
 Here is a complete *hello world* example in case you missed the usual `return`.
