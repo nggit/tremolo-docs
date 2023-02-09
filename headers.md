@@ -65,7 +65,7 @@ First, using the `set_header` of the [Response Object](https://nggit.github.io/t
 
 ```python
 
-server['response'].set_header('Cookie', 'a=xyz')
+server['response'].set_header('Set-Cookie', 'a=xyz')
 ```
 
 And the proper way is by using the `set_cookie`. It provides a convenient parameter for easily set cookie expiration, etc.
