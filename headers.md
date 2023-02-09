@@ -4,6 +4,8 @@ nav_order: 6
 title: Headers and Cookies
 ---
 
+You can **get** Headers and Cookies with the [Request Object](https://nggit.github.io/tremolo-docs/request.html), and how to **set** it is by using the  [Response Object](https://nggit.github.io/tremolo-docs/response.html).
+
 ## How to get cookies?
 
 Consider the following HTTP request:
@@ -59,14 +61,14 @@ It then may return:
 
 There are two ways.
 
-First, using `set_header`:
+First, using the `set_header` of the [Response Object](https://nggit.github.io/tremolo-docs/response.html):
 
 ```python
 
 server['response'].set_header('Cookie', 'a=xyz')
 ```
 
-And the proper way is using `set_cookie`. It provides a convenient parameter for easily set cookie expiration, etc.
+And the proper way is by using the `set_cookie`. It provides a convenient parameter for easily set cookie expiration, etc.
 
 ```python
 server['response'].set_cookie('a', 'xyz', expires=3600)
