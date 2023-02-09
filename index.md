@@ -14,11 +14,11 @@ async def hello_world(**server):
     yield b'world!'
 ```
 
-You can take advantage of this to serve files efficiently:
+You can take advantage of this to serve big files efficiently:
 
 ```python
 @app.route('/my/url/big.data')
-async def my_movie(content_type='application/octet-stream', **server):
+async def my_big_data(content_type='application/octet-stream', **server):
     with open('/my/folder/big.data', 'rb') as f:
         chunk = True
 
