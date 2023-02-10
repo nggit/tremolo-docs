@@ -1,6 +1,6 @@
 ---
 layout: page
-nav_order: 5
+nav_order: 6
 title: Response Object
 ---
 `server['response']` is basically an instantiation of [HTTPResponse](https://github.com/nggit/tremolo/blob/master/tremolo/lib/http_response.py) class.
