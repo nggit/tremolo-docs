@@ -1,12 +1,12 @@
 ---
 layout: page
-nav_order: 2
+nav_order: 3
 title: Routing
 ---
 
 Tremolo has no difficult abstractions, and never will. You don't need to learn a lot of trivial things. All you need to learn is Python.
 
-Tremolo uses basic routing and built-in [re](https://docs.python.org/3/library/re.html) module.
+Tremolo uses only basic routing and built-in [re](https://docs.python.org/3/library/re.html) module.
 
 ## Basic
 The following will handle
