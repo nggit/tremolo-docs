@@ -40,3 +40,11 @@ async def my_page(**server):
 The regex syntax above uses *named groups* which you can learn more about at [https://docs.python.org/3/library/re.html#re.Match.groupdict](https://docs.python.org/3/library/re.html#re.Match.groupdict)
 
 You can always check what kind of data is received if using regex in `request.params['url']`. It's a dict object.
+
+## Custom 404 page
+```python
+@app.errorhandler(404)
+async def my_error_page(**server):
+    return 'This is my custom 404 page.'
+```
+ 
