@@ -106,3 +106,16 @@ or
 ```
 curl -X POST -H 'Transfer-Encoding: chunked' -H 'Content-Type: application/octet-stream' --data-binary '@/path/to/image.png' -v http://localhost:8000/upload
 ```
+
+Note that the default maximum of body is **2MiB**. You can increase it by set the `client_max_body_size` in the upload handler for example:
+```python
+@app.route('/upload')
+async def upload(client_max_body_size=100 * 1048576, **server):
+# ...
+```
+or globally in `app.run()`:
+```python
+app.run('0.0.0.0', 8000, client_max_body_size=100 * 1048576)
+```
+
+Now you should be able to upload files for up to 100MiB in size.
