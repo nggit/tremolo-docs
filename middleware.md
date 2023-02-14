@@ -87,9 +87,9 @@ Here is a `print` result of the data before it is sent to the client in the form
 ('header', b'HTTP/1.1 200 OK\r\n')
 ('header', bytearray(b'Date: Thu, 09 Feb 2023 04:00:36 GMT\r\nServer: Tremolo\r\nTransfer-Encoding: chunked\r\n'))
 ('header', b'Content-Type: text/html; charset=utf-8\r\nConnection: keep-alive\r\n\r\n')
-('body', b'6\r\nHello\r\n')
-('body', b'6\r\nWorld!\r\n')
-('body', b'0\r\n\r\n')
+('body', b'Hello')
+('body', b'World!')
+('body', b'')
 ('data', None)
 ```
 
