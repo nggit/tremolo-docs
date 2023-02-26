@@ -18,7 +18,7 @@ async def my_big_data(content_type='application/octet-stream', **server):
 
             yield chunk
 ```
-is not blocking (although it's inefficient). Thanks to the download speed limiter.
+is **not** blocking (although it's inefficient). Thanks to the download speed limiter.
 
 Internally, Tremolo will suspend each chunk / `yield` at some amount of time depending on the given speed setting.
 The lower speed setting given, the more chance for other coroutines to run.
