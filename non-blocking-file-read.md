@@ -23,7 +23,7 @@ is not blocking (although it's inefficient). Thanks to the download speed limite
 Internally, Tremolo will suspend each chunk / `yield` at some amount of time depending on the given speed setting.
 The lower speed setting given, the more chance for other coroutines to run.
 
-Using a library like `aiofile` should be more efficient. Or reading the file in a separate thread with [loop.run_in_executor](https://docs.python.org/3/library/asyncio-eventloop.html#asyncio.loop.run_in_executor):
+Using a library like `aiofile` should gives better performance. Or reading the file in a separate thread with [loop.run_in_executor](https://docs.python.org/3/library/asyncio-eventloop.html#asyncio.loop.run_in_executor):
 
 ```python
 import concurrent.futures
