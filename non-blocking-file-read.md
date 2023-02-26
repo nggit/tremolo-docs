@@ -33,12 +33,36 @@ async def my_video(content_type='video/mp4', **server):
     loop = server['loop']
     buffer_size = server['options']['buffer_size']
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
-        with open('/my/folder/file.mp4', 'rb') as f:
+    with open('/my/folder/file.mp4', 'rb') as f:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
             chunk = True
 
             while chunk:
                 chunk = await loop.run_in_executor(executor, f.read, buffer_size)
 
                 yield chunk
+```
+
+Or a slight variation:
+
+```python
+import concurrent.futures
+
+@app.route('/my/url/file.mp4')
+async def my_video(content_type='video/mp4', **server):
+    loop = server['loop']
+    buffer_size = server['options']['buffer_size']
+
+    def read_file():
+        with open('/my/folder/file.mp4', 'rb') as f:
+            chunk = True
+
+            while chunk:
+                chunk = f.read(buffer_size)
+
+                yield chunk
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
+        for data in await loop.run_in_executor(executor, read_file):
+            yield data
 ```
