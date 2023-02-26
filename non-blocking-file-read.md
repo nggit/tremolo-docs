@@ -18,12 +18,14 @@ async def my_big_data(content_type='application/octet-stream', **server):
 
             yield chunk
 ```
-is **not** blocking (although it's inefficient). Thanks to the download speed limiter.
+is **not** blocking (although it's not fully efficient). Thanks to the download speed limiter.
 
 Internally, Tremolo will suspend each chunk / `yield` at some amount of time depending on the given speed setting.
 The lower speed setting given, the more chance for other coroutines to run.
 
-Using a library like `aiofile(s)` should gives better performance. Or reading the file in a separate thread with [loop.run_in_executor](https://docs.python.org/3/library/asyncio-eventloop.html#asyncio.loop.run_in_executor):
+Using a library like `aiofile(s)` should gives better performance.
+
+Or reading the file in a separate thread with [loop.run_in_executor](https://docs.python.org/3/library/asyncio-eventloop.html#asyncio.loop.run_in_executor):
 
 ```python
 import concurrent.futures
