@@ -35,12 +35,4 @@ async def hello_world_r(**server):
 
     await response.send(b'HTTP/1.1 200 OK\r\nConnection: close\r\n\r\n')
     await response.send(b'Hello World!')
-
-    """ don't forget to close by sending a None:
-
-        await response.send(None)
-
-    or calling the close() method
-    """
-    response.close()
 ```
