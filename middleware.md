@@ -44,8 +44,7 @@ async def my_request_middleware(**server):
         response.set_status(405, 'Method Not Allowed')
         response.set_content_type('text/plain')
 
-        """
-        Halt with return. The request will end at this point.
+        """ Halt with return. The request will end at this point.
         The next middlewares (if any), and handlers
         will not be executed.
         """
@@ -91,7 +90,6 @@ Here is a `print` result of the data before it is sent to the client in the form
 ('body', b'Hello')
 ('body', b'World!')
 ('body', b'')
-('data', None)
 ```
 
 Since the `on_data` handler may be called multiple times, the `name` field is handy to tell if it is `header` or `body` part.
