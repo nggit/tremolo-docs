@@ -91,3 +91,5 @@ Here is a `print` result of the data before it is sent to the client in the form
 ```
 
 Since the `on_data` handler may be called multiple times, the `name` field is handy to tell if it is `header` or `body` part.
+
+Note that the `body` in this middleware is original data / pre-encoded (eg in the case of `Transfer-encoding: chunked`).
