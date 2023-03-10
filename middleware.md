@@ -84,9 +84,7 @@ async def my_data_middleware(**server):
 Here is a `print` result of the data before it is sent to the client in the form of a tuple pair, `(name, data)`.
 
 ```python
-('header', b'HTTP/1.1 200 OK\r\n')
-('header', bytearray(b'Date: Thu, 09 Feb 2023 04:00:36 GMT\r\nServer: Tremolo\r\nTransfer-Encoding: chunked\r\n'))
-('header', b'Content-Type: text/html; charset=utf-8\r\nConnection: keep-alive\r\n\r\n')
+('header', b'HTTP/1.1 200 OK\r\nDate: Thu, 09 Feb 2023 04:00:36 GMT\r\nServer: Tremolo\r\nTransfer-Encoding: chunked\r\nContent-Type: text/html; charset=utf-8\r\nConnection: keep-alive\r\n\r\n')
 ('body', b'Hello')
 ('body', b'World!')
 ('body', b'')
