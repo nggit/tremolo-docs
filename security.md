@@ -4,7 +4,7 @@ title: Security
 ---
 
 It should be noted that Tremolo does not validate HTTP requests by default.
-Tremolo is a microframework, it tends to accept data and parse headers as is.
+Tremolo is a *microframework*, it tends to accept data and parse headers as is.
 
 Some objects like `request.method` may contain anything.
 
