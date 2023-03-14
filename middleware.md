@@ -5,7 +5,7 @@ title: Middleware
 
 Middleware is like MITM. It can *intercept* **requests** before they are processed by handlers, and **responses** before they are sent to the client/browser.
 
-Currently, Tremolo has two kinds of middleware that can be created. Which are `on_request` and `on_data`.
+Currently, Tremolo has two kinds of middleware that can be created. Which are `on_request` and `on_send`.
 
 The `on_request` allows you to put certain code globally at the very front.
 You can filter, authenticate, then halt (if necessary) before the request goes to / is processed by handlers.
@@ -69,14 +69,14 @@ Server: Tremolo
 Request method FOO is not supported!
 ```
 
-You may need to use `on_data` for but not limited to, implementing caching.
+You may need to use `on_send` for but not limited to, implementing caching.
 
 Consider the following code:
 
 ```python
-@app.on_data
+@app.on_send
 async def my_data_middleware(**server):
-    data = server['options']['data']
+    data = server['context'].data
 
     print(data)
 ```
@@ -90,6 +90,6 @@ Here is a `print` result of the data before it is sent to the client in the form
 ('body', b'')
 ```
 
-Since the `on_data` handler may be called multiple times, the `name` field is handy to tell if it is `header` or `body` part.
+Since the `on_send` handler may be called multiple times, the `name` field is handy to tell if it is `header` or `body` part.
 
 Note that the `body` in this middleware is original data / pre-encoded (eg in the case of `Transfer-encoding: chunked`).
