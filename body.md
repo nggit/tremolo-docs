@@ -14,7 +14,13 @@ You can process `multipart/form-data` yourself if necessary.
 
 ## Form
 
-Tremolo by default will populate the form if the `POST` data is `application/x-www-form-urlencoded` in:
+If the `POST` data is `application/x-www-form-urlencoded`, it can be retrieved with:
+
+```python
+form_data = await server['request'].form
+```
+
+After that being called (at least once), then the form data will also available at:
 
 ```python
 server['request'].params['post']
@@ -33,8 +39,9 @@ async def my_login_handler(**server):
     credentials = 'myuser:mypass'
 
     try:
-        user = request.params['post']['user'][-1]
-        password = request.params['post']['password'][-1]
+        form_data = await server['request'].form
+        user = form_data['user'][-1]
+        password = form_data['password'][-1]
 
         if secrets.compare_digest('{:s}:{:s}'.format(user, password), credentials):
             return 'Login success!'
