@@ -30,12 +30,12 @@ async def hello_world(chunked=False, rate=2097152, buffer_size=65536, **server):
 * *rate* 2MiB/s is the download speed limit for each client. This is useful for limiting bandwidth usage as well as mitigating bandwidth hogs.
 * *buffer_size* Tremolo will always process data every chunk based on this size.
 
-In addition to the options above, you can even define your own options, and they will magically become available in `server['options']`.
+In addition to the options above, you can even define your own options, and they will magically become available in `server['context'].options`.
 
 ```python
 @app.route('/hello')
 async def hello_world(a=1, rate=2097152, buffer_size=65536, **server):
-    print(server['options'])
+    print(server['context'].options)
 
     yield b'Hello'
     yield b'World!'
