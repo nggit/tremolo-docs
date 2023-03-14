@@ -8,7 +8,7 @@ Using an innocent way like this:
 ```python
 @app.route('/my/url/big.data')
 async def my_big_data(content_type='application/octet-stream', **server):
-    buffer_size = server['options']['buffer_size']
+    buffer_size = server['context'].options['buffer_size']
 
     with open('/my/folder/big.data', 'rb') as f:
         chunk = True
@@ -33,7 +33,7 @@ import concurrent.futures
 @app.route('/my/url/file.mp4')
 async def my_video(content_type='video/mp4', **server):
     loop = server['loop']
-    buffer_size = server['options']['buffer_size']
+    buffer_size = server['context'].options['buffer_size']
 
     with open('/my/folder/file.mp4', 'rb') as f:
         with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
@@ -53,7 +53,7 @@ import concurrent.futures
 @app.route('/my/url/file.mp4')
 async def my_video(content_type='video/mp4', **server):
     loop = server['loop']
-    buffer_size = server['options']['buffer_size']
+    buffer_size = server['context'].options['buffer_size']
 
     def read_file():
         with open('/my/folder/file.mp4', 'rb') as f:
