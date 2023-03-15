@@ -17,7 +17,7 @@ You can process `multipart/form-data` yourself if necessary.
 If the `POST` data is `application/x-www-form-urlencoded`, it can be retrieved with:
 
 ```python
-form_data = await server['request'].form
+form_data = await server['request'].form()
 ```
 
 After that being called (at least once), then the form data will also available at:
@@ -39,7 +39,7 @@ async def my_login_handler(**server):
     credentials = 'myuser:mypass'
 
     try:
-        form_data = await server['request'].form
+        form_data = await server['request'].form()
         user = form_data['user'][-1]
         password = form_data['password'][-1]
 
