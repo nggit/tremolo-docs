@@ -17,12 +17,15 @@ Deploying Tremolo behind a CDN like Cloudflare, or using a reverse proxy / TLS t
 ## Avoid high memory consumptions
 You should be careful when sing `request.body()`. It's not memory wise. Consider using `request.read()` instead. Otherwise, you have to set `client_max_body_size` to a lower best value.
 
-When using `request.form()`, you can limit how much data that allowed to enter internal form parser.
+When using `request.form()`, you can limit how much data that allowed to enter internal form parser. You can set it with the `limit` argument.
 
-You can set it with `limit` argument. If you sure / only need short amount of form data, eg. 16KiB, you can do the following:
+If you sure / only need short amount of form data, eg. 16KiB, you can do the following:
 
 ```python
 form_data = await request.form(limit=16384)
 ```
 
-The default is 8MiB. By lowering its value will help mitigating DoS attacks.
+Note that if the coming request body higher than the `limit`, it will return an empty `{}`.
+The default `limit` is 8MiB.
+
+By lowering its value will help mitigating DoS attacks.
