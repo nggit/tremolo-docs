@@ -18,7 +18,9 @@ async def my_big_data(content_type='application/octet-stream', **server):
 
             yield chunk
 ```
-is **not** blocking (although it's not fully efficient). Thanks to the download speed limiter.
+normally will **not** block the event loop. As long as the blocking call `f.read()` is quick.
+
+The subsequent calls to it (inside `while chunk/True`) is really safe. Thanks to the download speed limiter.
 
 Internally, Tremolo will suspend each chunk / `yield` at some amount of time depending on the given speed setting.
 The lower speed setting given, the more chance for other coroutines to run.
