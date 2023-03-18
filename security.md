@@ -19,10 +19,10 @@ You should be careful when sing `request.body()`. It's not memory wise. Consider
 
 When using `request.form()`, you can limit how much data that allowed to enter internal form parser. You can set it with the `limit` argument.
 
-If you sure / only need short amount of form data, eg. 16KiB, you can do the following:
+If you sure / only need short amount of form data, eg. under 64KiB, you can do the following:
 
 ```python
-form_data = await request.form(limit=16384)
+form_data = await request.form(limit=65536)
 ```
 
 Note that if the coming request body higher than the `limit`, it will return an empty `{}`.
