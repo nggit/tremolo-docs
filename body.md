@@ -39,7 +39,7 @@ async def my_login_handler(**server):
     credentials = 'myuser:mypass'
 
     try:
-        form_data = await server['request'].form()
+        form_data = await request.form()
         user = form_data['user'][-1]
         password = form_data['password'][-1]
 
