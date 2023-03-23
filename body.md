@@ -6,11 +6,9 @@ title: Body and POST
 
 **POST** is one of the request methods that has a body. `POST` is usually used to send forms / upload data.
 
-Currently Tremolo does not support `multipart/form-data` only supports `application/x-www-form-urlencoded`.
+Tremolo supports `application/x-www-form-urlencoded` and `multipart/form-data`.
 
-However, Tremolo supports RAW Body and HTTP chunked upload out of the box.
-
-You can process `multipart/form-data` yourself if necessary.
+Tremolo also supports RAW Body and HTTP chunked upload out of the box.
 
 ## Form
 
@@ -65,6 +63,30 @@ Content-Type: text/html; charset=utf-8
 Connection: keep-alive
 
 Login success!
+```
+
+## Multipart
+You can stream multipart through the `server['request'].files()` *async generator*. Each will return a tuple object `(info, data)`.
+
+```python
+@app.route('/upload')
+async def upload(**server):
+    async for info, data in server['request'].files():
+        print(info, data[:12])
+
+    return 'Done.'
+```
+You can try:
+```
+curl -X POST -H "Content-Type: multipart/form-data; boundary=myboundary" -F "mytext=dataxxxx" -F "myfile=@file.txt" -F "myfile2=@image.jpg" http://localhost:8000/upload
+```
+
+Then the above snippet will print something like:
+
+```python
+{'name': 'mytext'} bytearray(b'dataxxxx')
+{'name': 'myfile', 'filename': 'file.txt', 'type': 'text/plain'} bytearray(b'datayyyy\n')
+{'name': 'myfile2', 'filename': 'image.jpg', 'type': 'image/jpeg'} bytearray(b'\xff\xd8\xff\xe0\x00\x10JFIF\x00\x01')
 ```
 
 ## RAW Body upload
