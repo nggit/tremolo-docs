@@ -91,7 +91,7 @@ Then the above snippet will print something like:
 
 ## RAW Body upload
 
-`POST` data other than forms should be consumed with `server['response'].read()` which is an *async generator*, or `server['response'].body()` which is a *coroutine object*.
+`POST` data other than forms should be consumed with `server['request'].read()` which is an *async generator*, or `server['request'].body()` which is a *coroutine object*.
 
 Here's a code example to receive a binary data upload, then save it.
 
@@ -136,13 +136,7 @@ or
 curl -X POST -H 'Transfer-Encoding: chunked' -H 'Content-Type: application/octet-stream' --data-binary '@/path/to/image.png' -v http://localhost:8000/upload
 ```
 
-Note that the default maximum of body is **2MiB**. You can increase it by set the `client_max_body_size` in the upload handler for example:
-```python
-@app.route('/upload')
-async def upload(client_max_body_size=100 * 1048576, **server):
-# ...
-```
-or globally in `app.run()`:
+Note that the default maximum of body is **2MiB**. You can increase it by set the `client_max_body_size` in the `app.run()` for example:
 ```python
 app.run('0.0.0.0', 8000, client_max_body_size=100 * 1048576)
 ```
