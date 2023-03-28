@@ -35,12 +35,17 @@ Hello World!
 ## Middleware in action
 As Tremolo supports arbitrary request methods, You can halt for example if the received request method is neither `GET` nor `POST`:
 ```python
+from tremolo.exceptions import BadRequest
+
 @app.on_request
 async def my_request_middleware(**server):
     request = server['request']
     response = server['response']
 
-    if request.is_valid and request.method not in (b'GET', b'POST'):
+    if not request.is_valid
+        raise BadRequest
+
+    if request.method not in (b'GET', b'POST'):
         response.set_status(405, 'Method Not Allowed')
         response.set_content_type('text/plain')
 
@@ -54,6 +59,17 @@ async def my_request_middleware(**server):
 async def hello_world(**server):
     yield b'Hello'
     yield b'World!'
+```
+
+You might notice, other than using `return` to halt, you can `raise` an `HTTPException`:
+
+```python
+from tremolo.exceptions import BadRequest, MethodNotAllowed
+# ...
+
+    if request.method not in (b'GET', b'POST'):
+        raise MethodNotAllowed('Request method', request.method, is not supported!')
+# ...
 ```
 
 The response result of `curl -X FOO -i http://localhost:8000/hello` will be as follows:
