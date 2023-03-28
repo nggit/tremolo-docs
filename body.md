@@ -38,8 +38,8 @@ async def my_login_handler(**server):
 
     try:
         form_data = await request.form()
-        user = form_data['user'][-1]
-        password = form_data['password'][-1]
+        user = form_data['user'][0]
+        password = form_data['password'][0]
 
         if secrets.compare_digest('{:s}:{:s}'.format(user, password), credentials):
             return 'Login success!'
@@ -66,7 +66,7 @@ Login success!
 ```
 
 ## Multipart
-You can stream multipart through the `server['request'].files()` *async generator*. Each will return a tuple object `(info, data)`.
+You can *stream* multipart through the `server['request'].files()` *async generator*. Each will return a tuple object `(info, data)`.
 
 ```python
 @app.route('/upload')
