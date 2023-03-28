@@ -21,7 +21,7 @@ Before the `**server`, you can provide some options to fine tune the handler suc
 
 ```python
 @app.route('/hello')
-async def hello_world(chunked=False, rate=2097152, buffer_size=65536, **server):
+async def hello_world(chunked=False, rate=2097152, buffer_size=32768, **server):
     yield b'Hello'
     yield b'World!'
 ```
@@ -34,7 +34,7 @@ In addition to the options above, you can even define your own options, and they
 
 ```python
 @app.route('/hello')
-async def hello_world(a=1, rate=2097152, buffer_size=65536, **server):
+async def hello_world(a=1, rate=2097152, buffer_size=32768, **server):
     print(server['context'].options)
 
     yield b'Hello'
