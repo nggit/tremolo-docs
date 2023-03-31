@@ -43,7 +43,7 @@ You can always check what kind of data is received if using regex in `request.pa
 
 ## Custom 404 page
 ```python
-@app.errorhandler(404)
+@app.error(404)
 async def my_error_page(**server):
     return 'This is my custom 404 page.'
 ```
