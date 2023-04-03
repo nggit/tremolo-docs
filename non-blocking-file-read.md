@@ -48,10 +48,10 @@ async def my_video(content_type='video/mp4', **server):
 
     with ThreadPoolExecutor(max_workers=1) as executor:
         gen = read_file()
+        data = True
 
-        while True:
-            try:
-                yield await loop.run_in_executor(executor, gen.__next__)
-            except StopIteration:
-                break
+        while data:
+            data = await loop.run_in_executor(executor, gen.__next__)
+
+            yield data
 ```
