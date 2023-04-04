@@ -7,7 +7,7 @@ The key to getting static files resumable during download is to implement `Accep
 
 So the client/browser can request partial files with `Range`, e.g. `Range: bytes=500-999`.
 
-This is also what makes video files *seekable* by standard players in browsers.
+This is also what makes video files *seekable* by standard players in browsers (improving user experience).
 
 A helper, `response.sendfile()` comes for this purpose. Also with a **multipart ranges** support.
 
