@@ -9,7 +9,7 @@ So the client/browser can request partial files with `Range`, e.g. `Range: bytes
 
 This is also what makes video files *seekable* by standard players in browsers.
 
-A helper, `response.sendfile()` comes for this purpose. Also with **multipart ranges** support.
+A helper, `response.sendfile()` comes for this purpose. Also with a **multipart ranges** support.
 
 Usage:
 
