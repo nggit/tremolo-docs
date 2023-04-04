@@ -4,13 +4,12 @@ title: Resumable Downloads
 ---
 
 The key to getting static files resumable during download is to implement `Accept-Ranges`, `Content-Range` and related support.
+
 So the client/browser can request partial files with `Range`, e.g. `Range: bytes=500-999`.
 
 This is also what makes video files *seekable* by standard players in browsers.
 
-Tremolo has a helper, which is `response.sendfile()` for this purpose.
-
-It also supports **multipart ranges**.
+A helper, `response.sendfile()` comes for this purpose. Also with **multipart ranges** support.
 
 Usage:
 
