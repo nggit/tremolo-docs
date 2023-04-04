@@ -68,7 +68,7 @@ from tremolo.exceptions import BadRequest, MethodNotAllowed
 # ...
 
     if request.method not in (b'GET', b'POST'):
-        raise MethodNotAllowed('Request method', request.method, is not supported!')
+        raise MethodNotAllowed('Request method', request.method, 'is not supported!')
 # ...
 ```
 
