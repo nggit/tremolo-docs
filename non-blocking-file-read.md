@@ -55,3 +55,5 @@ async def my_video(content_type='video/mp4', **server):
 
             yield data
 ```
+
+Note that this method may add some overhead compared to using the standar method.
