@@ -3,14 +3,14 @@ layout: page
 title: Resumable Downloads
 ---
 
-The key to getting static files to resume during download is to implement `Accept-Ranges`, `Content-Range` and related support.
-
+The key to getting static files resumable during download is to implement `Accept-Ranges`, `Content-Range` and related support.
 So the client/browser can request partial files with `Range`, e.g. `Range: bytes=500-999`.
 
 This is also what makes video files *seekable* by standard players in browsers.
 
-Tremolo has a helper, `response.sendfile()` for this purpose.
-Which also supports **multipart ranges**.
+Tremolo has a helper, which is `response.sendfile()` for this purpose.
+
+It also supports **multipart ranges**.
 
 Usage:
 
@@ -28,4 +28,4 @@ async def download(**server):
     return True
 ```
 Note that this built-in feature *just works*.
-It does not use a *shiny* module like `aiofiles` for the sake of simplicity.
+It does not use a shiny module like `aiofiles` for the sake of simplicity.
