@@ -6,7 +6,7 @@ title: Request Object
 
 `server['request']` is basically an instantiation of [HTTPRequest](https://github.com/nggit/tremolo/blob/master/tremolo/lib/http_request.py) class.
 
-Here are some of available objects beside [Headers and Cookies](https://nggit.github.io/tremolo-docs/headers.html):
+Here are some of available objects in addition to those in [Headers and Cookies](headers.html) and [Body and POST](body.html):
 
 ```python
 @app.route('/hello')
