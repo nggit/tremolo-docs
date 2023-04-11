@@ -22,7 +22,7 @@ Whereas `end()` is like `return`, which is only allowed to be called once.
 Whether `yield`, `return`, `write()`, or `end()` will **implicitly** send the HTTP header once.
 Normally, You don't need to set anything except a few things like response status, `Content-Type`, `Set-Cookie` by using the `set_*` method above (should be called earlier).
 
-If you need to send RAW responses, Consider using the `send()` method. This will not implicitly send the HTTP header. The `set_*` method call will be meaningless.
+If you need to send RAW responses, consider using the `send()` method. This will not implicitly send the HTTP header. The `set_*` method call will be meaningless.
 
 Here's a summary of the comparison:
 
