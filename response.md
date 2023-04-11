@@ -39,4 +39,4 @@ Here's a summary of the comparison:
 | await response.send(None)            | No                   | Mark the end of response. Connection will be closed, but respect HTTP keep-alive    |
 | response.close()                     | No                   | Just close the connection. Called automatically in handlers when `None` is returned |
 
-See also: [response.sendfile()](resumable-downloads.html).
+See also: [response.sendfile()](resumable-downloads.html)
