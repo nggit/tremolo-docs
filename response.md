@@ -14,7 +14,7 @@ set_header(name, value='')
 set_status(status=200, message=b'OK')
 ```
 
-Instead of using [yield / return](yield.html) to send the HTTP response body, You can use the `write()` or `end()` method.
+You can use the `write()` or `end()` method instead of [yield / return](yield.html) to send the HTTP response body. Although the latter is preferred.
 
 You can imagine that `write()` is like `yield`, it can be called more than once.
 Whereas `end()` is like `return`, which is only allowed to be called once.
