@@ -42,6 +42,8 @@ Limits the sending speed to the client / download speed per second.
 
 The default is `1048576`, which means **1MiB/s** or **8.39Mbps**.
 
+If you want to increase the value too far from the default value, ideally you should also increase the *buffer_size* too.
+
 You can also apply download rate per [handler](handlers.html) using `rate`.
 
 ### upload_rate
