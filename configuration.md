@@ -3,7 +3,7 @@ layout: page
 title: Configuration
 ---
 
-Below are some parameters that can be used in `listen()` or `run()`.
+Below are some parameters that can be used in `app.listen()` or `app.run()`.
 
 ### host
 E.g. `localhost`, `127.0.0.1`, etc.
@@ -12,10 +12,13 @@ E.g. `localhost`, `127.0.0.1`, etc.
 E.g. `8000`, `8080`, etc.
 
 ### reuse_port
-The default is `True`
+The default is `True`.
 
 ### worker_num
-The default is `1`
+The default is `1`.
+
+### backlog
+The default is `100`.
 
 ### ssl
 If you want to enable https, fill this parameter with a `dict` for example:
@@ -27,7 +30,7 @@ ssl={'cert': '/path/to/fullchain.pem', 'key': '/path/to/privkey.pem'}
 The default is `None`.
 
 ### debug
-`debug=True` will show a backtrace if there is an error. You should disable this in production with `debug=False`.
+If there is an error, `debug=True` will include a backtrace. You should disable this in production with `debug=False`.
 
 If you do not pass this parameter, the default value is `False`.
 
@@ -69,4 +72,4 @@ The default is `30` seconds.
 ### server_name
 Set the `Server` field in the response header.
 
-The default is `b'Tremolo'`
+The default is `b'Tremolo'`.
