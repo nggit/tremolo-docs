@@ -50,10 +50,10 @@ Limits the upload / POST speed.
 The default is the same as *download_rate*, `1048576`.
 
 ### buffer_size
-The maximum amount of data at each `request.read()` and "send" to the client.
+The maximum amount of data at each `request.read()`, and each "write" to the client.
 The default is `16384`, or **16KiB**.
 
-On send, the *buffer_size* value is also used to determine the watermark.
+On write, the `buffer_size` value is also used to determine the watermark.
 With `buffer_size=16384`, the high value of the watermark will be 4x or **65536**, and the low value will be 0.5x or **8192**.
 
 You can also apply `buffer_size` in the [handler](handlers.html) or `response.write()`.
