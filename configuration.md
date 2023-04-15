@@ -60,6 +60,8 @@ You can also apply `buffer_size` in the [handler](handlers.html) or `response.wr
 
 In the case of `response.write()` (may be called multiple times), only the first is considered.
 
+But do not passing different `buffer_size` each time in the `response.write()`.
+
 ### client_max_body_size
 Maximum body on requests such as POST / file upload.
 
