@@ -30,7 +30,7 @@ ssl={'cert': '/path/to/fullchain.pem', 'key': '/path/to/privkey.pem'}
 The default is `None`.
 
 ### debug
-If there is an error, `debug=True` will include a backtrace. You should disable this in production with `debug=False`.
+By using the `debug=True`, A backtrace will also included in the error message. You should disable this in production with `debug=False`.
 
 If you do not pass this parameter, the default value is `False`.
 
@@ -41,6 +41,8 @@ The default is `'DEBUG'` (string). For more info, please check [https://docs.pyt
 Limits the sending speed to the client / download speed per second.
 
 The default is `1048576`, which means **1MiB/s** or **8.39Mbps**.
+
+You can also apply download rate per [handler](handlers.html) using `rate`.
 
 ### upload_rate
 Limits the upload / POST speed.
@@ -53,6 +55,10 @@ The default is `16384`, or **16KiB**.
 
 On send, the *buffer_size* value is also used to determine the watermark.
 With `buffer_size=16384`, the high value of the watermark will be 4x or **65536**, and the low value will be 0.5x or **8192**.
+
+You can also apply `buffer_size` in the [handler](handlers.html) or `response.write()`.
+
+In the case of `response.write()` (may be called multiple times), only the first is considered.
 
 ### client_max_body_size
 Maximum body on requests such as POST / file upload.
