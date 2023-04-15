@@ -3,7 +3,7 @@ layout: page
 title: HTTP Exceptions
 ---
 
-You can throw an [HTTPException](https://github.com/nggit/tremolo/blob/master/tremolo/exceptions.py) inside [handlers](handlers.html) or [middlewares](middleware.html).
+You can raise an [HTTPException](https://github.com/nggit/tremolo/blob/master/tremolo/exceptions.py) inside [handlers](handlers.html) or [middlewares](middleware.html).
 
 Consider the following code:
 
