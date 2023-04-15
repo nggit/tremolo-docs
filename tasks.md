@@ -54,5 +54,5 @@ ctx = server['context']
 ctx.anykey = 'mydata'
 ```
 
-Note that the following attributes is reserved:
+Note that the following attributes are reserved:
 `data`, `options`, and `tasks`.
