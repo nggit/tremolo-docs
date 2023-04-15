@@ -37,7 +37,7 @@ if __name__ == '__main__':
     app.run('0.0.0.0', 8000, debug=True)
 ```
 
-The code above runs an *awaitable* `my_coro` using `loop.create_task()`. So that it does not wait for `my_coro` in the main task, not blocking the following `yield b'Processing...' to be executed.
+The code above runs an *awaitable* `my_coro` using `loop.create_task()`. So that it does not wait for `my_coro` in the main task, not blocking the following `yield b'Processing...` to be executed.
 
 Appending tasks to `server['context'].tasks` is not required. But it will help Tremolo to cancel pending tasks on client disconnect.
 
