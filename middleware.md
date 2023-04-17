@@ -5,7 +5,7 @@ title: Middleware
 
 Middleware is like MITM. It can *intercept* **requests** before they are processed by handlers, and **responses** before they are sent to the client/browser.
 
-Currently, Tremolo has two kinds of middleware that can be created. Which are `on_request` and `on_send`.
+Tremolo has two kinds of middleware that can be created. Which are `on_request` and `on_send`.
 
 The `on_request` allows you to put certain code globally at the very front.
 You can filter, authenticate, then halt (if necessary) before the request goes to / is processed by handlers.
@@ -109,3 +109,12 @@ Here is a `print` result of the data before it is sent to the client in the form
 Since the `on_send` handler may be called multiple times, the `name` field is handy to tell if it is `header` or `body` part.
 
 Note that the `body` in this middleware is original data / pre-encoded (eg in the case of `Transfer-encoding: chunked`).
+
+## Decorators
+In addition to `on_request` and `on_send` middleware, there are also decorators such as `on_connect` and `on_close`.
+
+```python
+@app.on_close
+async def on_close(**server):
+    print('=== CLOSED ===')
+```
