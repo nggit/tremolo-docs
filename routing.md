@@ -28,7 +28,7 @@ The following will match for example with http://example.com/page/12, http://exa
 @app.route(r'^/page/(?P<page_id>\d+)')
 async def my_page(**server):
     request = server['request']
-    page_id = request.params['url'].get('page_id', b'')
+    page_id = request.params['path'].get('page_id', b'1')
 
     """ Tremolo often uses bytes-like objects as is,
     rather than converting to str or int.
@@ -39,7 +39,7 @@ async def my_page(**server):
 
 The regex syntax above uses *named groups* which you can learn more about at [https://docs.python.org/3/library/re.html#re.Match.groupdict](https://docs.python.org/3/library/re.html#re.Match.groupdict)
 
-You can always check what kind of data is received if using regex in `request.params['url']`. It's a dict object.
+You can always check what kind of data is received if using regex in `request.params['path']`. It's a dict object.
 
 ## Custom 404 page
 ```python
