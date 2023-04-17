@@ -13,8 +13,10 @@ Here are some of available objects in addition to those in [Headers and Cookies]
 async def hello_world(**server):
     print('HTTP_HOST:',      server['request'].host)
     print('REQUEST_METHOD:', server['request'].method)
+    print('REQUEST_URI:',    server['request'].url)
     print('PATH:',           server['request'].path)
-    print('QUERY_STRING:',   server['request'].query)
+    print('QUERY:',          server['request'].query)
+    print('QUERY_STRING:',   server['request'].query_string)
     print('VERSION:',        server['request'].version)
 
     yield b'Hello'
@@ -26,7 +28,9 @@ async def hello_world(**server):
 ```
 HTTP_HOST:      bytearray(b'localhost:8000')
 REQUEST_METHOD: bytearray(b'GET')
-PATH:           bytearray(b'/hello?a=1&b=2')
-QUERY_STRING:   {'a': ['1'], 'b': ['2']}
+REQUEST_URI:    bytearray(b'/hello?a=1&b=2')
+PATH:           bytearray(b'/hello')
+QUERY:          {'a': ['1'], 'b': ['2']}
+QUERY_STRING:   bytearray(b'a=1&b=2')
 VERSION:        bytearray(b'1.1')
 ```
