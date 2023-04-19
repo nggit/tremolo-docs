@@ -4,7 +4,7 @@ nav_order: 8
 title: Body and POST
 ---
 
-**POST** is one of the request methods that has a body. `POST` is usually used to send forms / upload data.
+**POST** is one of the request methods that comes with a body. `POST` is usually used to send forms / upload data.
 
 Tremolo supports `application/x-www-form-urlencoded` and `multipart/form-data`.
 
