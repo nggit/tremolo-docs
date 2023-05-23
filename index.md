@@ -73,7 +73,7 @@ async def app(scope, receive, send):
         'type': 'http.response.start',
         'status': 200,
         'headers': [
-            (b'content-type', b'text/plain'),
+            (b'content-type', b'text/plain')
         ]
     })
 
@@ -110,7 +110,7 @@ uvicorn --loop asyncio --http h11 --log-level error example:app
 vs
 
 ```
-python -m tremolo --log-level ERROR example:app
+python3 -m tremolo --log-level ERROR example:app
 ```
 
 You will find that Tremolo is reasonably fast.
