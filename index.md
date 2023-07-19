@@ -157,5 +157,17 @@ Tremolo is still in the early stages of development. But you can try installing 
 python3 -m pip install --upgrade tremolo
 ```
 
+## Testing
+Just run `python3 alltests.py` for all tests. Or each *test_\*.py* in the [tests/](https://github.com/nggit/tremolo/tree/master/tests) folder, for example `python3 tests/test_cli.py`.
+
+If you also want measurements with [coverage](https://coverage.readthedocs.io/):
+
+```
+coverage run alltests.py
+coverage combine
+coverage report
+coverage html # to generate html reports
+```
+
 ## License
 MIT
