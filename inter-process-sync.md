@@ -7,6 +7,7 @@ When Tremolo HTTP server is configured with [worker_num](configuration.html#work
 
 `server['lock']` can be used to avoid this potential problem.
 
+It can synchronize all tasks between multiple workers/processes. In single process mode, it will only be like [asyncio.Lock](https://docs.python.org/3/library/asyncio-sync.html#asyncio.Lock).
 
 Example of using the asynchronous [context manager](https://python.readthedocs.io/en/latest/glossary.html#term-context-manager) with `async with`:
 
