@@ -14,6 +14,11 @@ E.g. `8000`, `8080`, etc.
 ### reuse_port
 The default is `True`.
 
+### locks
+The default is `16`. Please read [Inter-process Synchronization](inter-process-sync.html#multiple-shared-resources).
+
+Note that this setting is not available in ASGI server mode.
+
 ### worker_num
 The default is `1`.
 
