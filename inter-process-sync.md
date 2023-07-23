@@ -5,7 +5,7 @@ title: Inter-process Synchronization
 
 When Tremolo HTTP server is configured with [worker_num](configuration.html#worker_num) > 1, it can be dangerous e.g. when you have code that writes to the same file.
 
-`server['lock']` can be used to avoid this potential problem.
+`server['lock']` can be used to mitigate this potential problem.
 
 It can synchronize all tasks between multiple workers/processes. In single process mode, it will only be like [asyncio.Lock](https://docs.python.org/3/library/asyncio-sync.html#asyncio.Lock).
 
@@ -35,3 +35,34 @@ async def update(**server):
     finally:
         lock.release()
 ```
+
+## Multiple Shared Resources
+In case you have multiple shared resources/different files, using a single lock as above can block other concurrent tasks - **even** if they are going to modify different files. It makes sense to have more than one lock provided for each resource for maximum concurrency.
+
+Tremolo by default has **16** usable locks, `0 - 15` or `0x0 - 0xf`.
+
+```python
+# in current task
+    lock = server['lock']
+
+    async with lock(0):
+        # lock acquired, modify the file1
+        # other processes should be waiting,
+        # unless they are using different lock number
+
+# in another concurrent task
+    lock = server['lock']
+
+    async with lock(1):
+        # lock acquired, modify the file2
+        # other processes should be waiting,
+        # unless they are using different lock number
+```
+
+In the example above we found using two locks, `lock(0)` and `lock(1)`, for two different files.
+
+`lock(0)` is basically the same as `lock`, and if the given number exceeds the default range of `0 - 15`, for example **16**, it will be rotated using modulo internally. Meaning `lock(16)` will only be the same as `lock(0)` or `lock`.
+
+If more than 16 locks are required, they can be set with the [locks](configuration.html#locks) configuration.
+
+This is a design decision; that locks cannot be added on-demand/dynamically. Otherwise the implementation will be more complex and likely to be [overhead](https://docs.python.org/3/library/multiprocessing.html#multiprocessing.Manager).
