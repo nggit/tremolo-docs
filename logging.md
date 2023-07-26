@@ -6,6 +6,9 @@ title: Logging
 If you want to print your log messages, you can make use of `server['logger']` within [handlers](handlers.html) or [middlewares](middlewares.html).
 It is a Python's [Logger](https://docs.python.org/3/library/logging.html) object.
 
+{: .warning }
+You are responsible for sanitizing input to the logger.
+
 ```python
 from tremolo import Tremolo
 
