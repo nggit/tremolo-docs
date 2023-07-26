@@ -49,7 +49,9 @@ async def my_request_middleware(**server):
         response.set_status(405, 'Method Not Allowed')
         response.set_content_type('text/plain')
 
-        """ Halt with return. The request will end at this point.
+        """Halt with return.
+
+        The request will end at this point.
         The next middlewares (if any), and handlers
         will not be executed.
         """
