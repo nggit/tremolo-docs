@@ -30,7 +30,8 @@ async def my_page(**server):
     request = server['request']
     page_id = request.params['path'].get('page_id', b'1')
 
-    """ Tremolo often uses bytes-like objects as is,
+    """
+    Tremolo often uses bytes-like objects as is,
     rather than converting to str or int.
     so do not assume page_id is an int.
     """
