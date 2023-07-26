@@ -7,7 +7,7 @@ When Tremolo HTTP server is configured with [worker_num](configuration.html#work
 
 `server['lock']` can be used to mitigate this potential problem.
 
-It can synchronize all tasks between multiple workers/processes. In single process mode, it will only be like [asyncio.Lock](https://docs.python.org/3/library/asyncio-sync.html#asyncio.Lock).
+It can synchronize all tasks across multiple workers/processes. In single process mode, it will only be like [asyncio.Lock](https://docs.python.org/3/library/asyncio-sync.html#asyncio.Lock), but thread-safe.
 
 Example of using the asynchronous [context manager](https://python.readthedocs.io/en/latest/glossary.html#term-context-manager) with `async with`:
 
@@ -17,8 +17,8 @@ async def update(**server):
     lock = server['lock']
 
     async with lock:
-        # lock acquired, modify the file
-        # other processes should be waiting
+        # lock acquired, modify the shared resource
+        # other processes that are acquiring this lock should be waiting
 ```
 
 Or the traditional way:
@@ -30,8 +30,8 @@ async def update(**server):
 
     try:
         await lock.acquire()
-        # lock acquired, modify the file
-        # other processes should be waiting
+        # lock acquired, modify the shared resource
+        # other processes that are acquiring this lock should be waiting
     finally:
         lock.release()
 ```
@@ -47,16 +47,14 @@ Tremolo by default has **16** usable locks, `0 - 15` or `0x0 - 0xf`.
 
     async with lock(0):
         # lock acquired, modify the file1
-        # other processes should be waiting,
-        # unless they are using different lock number
+        # other processes that are acquiring this lock(0) should be waiting
 
-# in another concurrent task
+# in another concurrent task, independent from lock(0)
     lock = server['lock']
 
     async with lock(1):
         # lock acquired, modify the file2
-        # other processes should be waiting,
-        # unless they are using different lock number
+        # other processes that are acquiring this lock(1) should be waiting
 ```
 
 In the example above we found using two locks, `lock(0)` and `lock(1)`, for two different files.
