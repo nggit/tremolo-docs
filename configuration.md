@@ -89,6 +89,11 @@ Maximum client inactivity time in HTTP keep-alive state.
 
 The default is `30` seconds.
 
+### keepalive_connections
+Maximum number of keep-alive connections.
+
+The defaults is `512` (connections/worker).
+
 ### server_name
 Set the `Server` field in the response header.
 
