@@ -39,6 +39,11 @@ By using the `debug=True`, A backtrace will also included in the error message. 
 
 If you do not pass this parameter, the default value is `False`.
 
+### ws
+To Disable built-in WebSocket support, you can set this to `False`. The default is `True` or enabled.
+
+To disable it in the ASGI server mode, use `--no-ws`.
+
 ### log_level
 The default is `'DEBUG'` (string). For more info, please check [https://docs.python.org/3/library/logging.html#levels](https://docs.python.org/3/library/logging.html#levels).
 
