@@ -41,6 +41,16 @@ The code above runs an *awaitable* `my_coro` using `loop.create_task()`. So that
 
 Appending tasks to `server['context'].tasks` is not required. But it will help Tremolo to cancel pending tasks on client disconnect.
 
+For convenience, you can use the `ServerTasks.create`. Just add `tasks=None` placeholder parameter in the [handler](handlers.html) to use it:
+
+```python
+@app.route('/hello')
+async def hello_world(tasks=None, **server):
+    # ...
+
+    task = tasks.create(my_coro(fut))
+```
+
 ## Contexts
 `server['context']` is a mutable object (think a `dict` with a dot notation, or a [SimpleNamespace](https://docs.python.org/3/library/types.html#types.SimpleNamespace)).
 
