@@ -89,7 +89,7 @@ Then the above snippet will print something like:
 {'name': 'myfile2', 'filename': 'image.jpg', 'type': 'image/jpeg'} bytearray(b'\xff\xd8\xff\xe0\x00\x10JFIF\x00\x01')
 ```
 
-## RAW Body upload
+## Stream the request body / receive upload
 
 `POST` data other than forms should be consumed with `server['request'].read()` which is an *async generator*, or `server['request'].body()` which is a *coroutine object*.
 
@@ -142,3 +142,15 @@ app.run('0.0.0.0', 8000, client_max_body_size=100 * 1048576)
 ```
 
 Now you should be able to upload files for up to 100MiB in size.
+
+## Read the request body up to a certain size
+`read()` or `read(size=None)` is an alias of `stream()`, an `async generator`. If the `size` parameter is provided, it becomes *awaitable*.
+
+```python
+data = await server['request'].read(100)
+next_data = await server['request'].read(50)
+```
+
+It will read 150 bytes of the request body. When no more body can be read, an empty `bytearray()` will be returned.
+
+Note that `read()` will also decode *chunked encoding*. `recv(size)` can be used instead for reading the request body as is.
