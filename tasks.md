@@ -65,4 +65,4 @@ ctx.anykey = 'mydata'
 ```
 
 Note that the following attributes are reserved:
-`data`, `options`, and `tasks`.
+`options`, and `tasks`.

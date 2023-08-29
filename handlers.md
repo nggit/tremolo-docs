@@ -13,6 +13,19 @@ async def hello_world(**server):
     yield b'World!'
 ```
 
+or alternative version:
+
+```python
+@app.route('/hello')
+async def hello_world(response=None, **server):
+    await response.write(b'Hello')
+    await response.write(b'World!')
+
+    # optional. FYI, it is required on middleware
+    response.close()
+```
+
+
 Each handler is required to accept a *keyword arguments* in this case `**server`. Although the name does not have to be `server`, for example `**kwargs`.
 
 `server` is a dict object, which contains other objects that are often needed, such as `server['request']` which is an [HTTPRequest](https://nggit.github.io/tremolo-docs/request.html) object, and `server['response']` which is an [HTTPResponse](https://nggit.github.io/tremolo-docs/response.html) object.
@@ -30,7 +43,7 @@ async def hello_world(chunked=False, rate=2097152, buffer_size=32768, **server):
 * *rate* 2MiB/s is the download speed limit for each client. This is useful for limiting bandwidth usage as well as mitigating bandwidth hogs.
 * *buffer_size* Tremolo will always process data every chunk based on this size.
 
-In addition to the options above, you can even define your own options, and they will magically become available in `server['context'].options`.
+In addition to the options above, you can define arbitrary options, and they will magically become available in `server['context'].options`.
 
 ```python
 @app.route('/hello')

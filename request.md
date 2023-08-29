@@ -38,3 +38,7 @@ QUERY:          {'a': ['1'], 'b': ['2']}
 QUERY_STRING:   bytearray(b'a=1&b=2')
 VERSION:        bytearray(b'1.1')
 ```
+
+Note that `request.ip` is not security wise. It will take the ip address from `X-Forwarded-For` / HTTP header when available.
+
+It only becomes handy when Tremolo is deployed behind a proxy server, otherwise `request.client[0]` should be used.
