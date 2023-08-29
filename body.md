@@ -27,7 +27,7 @@ server['request'].params['post']
 Here's a simple example of how to handle login form:
 
 ```python
-import secrets
+from hmac import compare_digest
 
 @app.route('/login')
 async def my_login_handler(**server):
@@ -41,7 +41,7 @@ async def my_login_handler(**server):
         user = form_data['user'][0]
         password = form_data['password'][0]
 
-        if secrets.compare_digest('{:s}:{:s}'.format(user, password), credentials):
+        if compare_digest('{:s}:{:s}'.format(user, password), credentials):
             return 'Login success!'
 
     except (KeyError, IndexError):
@@ -144,7 +144,7 @@ app.run('0.0.0.0', 8000, client_max_body_size=100 * 1048576)
 Now you should be able to upload files for up to 100MiB in size.
 
 ## Read the request body up to a certain size
-`read()` or `read(size=None)` is an alias of `stream()`, an `async generator`. If the `size` parameter is provided, it becomes *awaitable*.
+`read()` or `read(size=None)` is an alias of `stream()`, an *async generator*. If the `size` parameter is provided, it becomes *awaitable*.
 
 ```python
 data = await server['request'].read(100)
