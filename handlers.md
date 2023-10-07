@@ -13,6 +13,19 @@ async def hello_world(**server):
     yield b'World!'
 ```
 
+or alternative version:
+
+```python
+@app.route('/hello')
+async def hello_world(response=None, **server):
+    await response.write(b'Hello')
+    await response.write(b'World!')
+
+    # optional. FYI, it is required on middleware
+    response.close()
+```
+
+
 Each handler is required to accept a *keyword arguments* in this case `**server`. Although the name does not have to be `server`, for example `**kwargs`.
 
 `server` is a dict object, which contains other objects that are often needed, such as `server['request']` which is an [HTTPRequest](https://nggit.github.io/tremolo-docs/request.html) object, and `server['response']` which is an [HTTPResponse](https://nggit.github.io/tremolo-docs/response.html) object.
