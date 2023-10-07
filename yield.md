@@ -24,7 +24,7 @@ async def hello_world_x(**server):
 Note that both `return` and `end()` are only suitable for sending relatively small amounts of data at a time.
 
 ## Disable Response Streaming on "yield"
-By default, every `yield` will be sent to the client (browser) immediately, even if it is a single byte. This allows *interlaced* behavior by utilizing chunked encoding in HTTP/1.1.
+By default, every `yield` will be sent to the client (browser) immediately, even if it is a single byte. This behavior is noticeable in HTTP/1.1 as it comes with chunked encoding feature.
 
 The following code will print `Hello, World!` to the browser, each character + 0.2 second delay in sequence:
 
@@ -38,7 +38,7 @@ async def hello_world(**server):
         yield bytes([b])
 ```
 
-`stream=False` can be used to disable such behavior. This will make the yields buffered; meaning performance may improve on multiple yields.
+`stream=False` can be used to disable response streaming. This will make the yields buffered; meaning performance may improve on multiple yields.
 
 ```python
 @app.route('/hello')
