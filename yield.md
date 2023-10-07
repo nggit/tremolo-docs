@@ -23,6 +23,33 @@ async def hello_world_x(**server):
 
 Note that both `return` and `end()` are only suitable for sending relatively small amounts of data at a time.
 
+## Disable Response Streaming on "yield"
+By default, every `yield` will be sent to the client (browser) immediately, even if it is a single byte. This allows *interlaced* behavior by utilizing chunked encoding in HTTP/1.1.
+
+The following code will print `Hello, World!` to the browser, each character + 0.2 second delay in sequence:
+
+```python
+@app.route('/hello')
+async def hello_world(**server):
+    for b in b'Hello, World!':
+        # put a delay on each character
+        await asyncio.sleep(0.2)
+
+        yield bytes([b])
+```
+
+`stream=False` can be used to disable such behavior. This will make the yields buffered; meaning performance may improve on multiple yields.
+
+```python
+@app.route('/hello')
+async def hello_world(stream=False, **server):
+    for b in b'Hello, World!':
+        # put a delay on each character
+        await asyncio.sleep(0.2)
+
+        yield bytes([b])
+```
+
 ## Send RAW data
 In some cases you may want to send RAW data. You can use the `send()` method of the [Response object](response.html).
 
