@@ -5,10 +5,12 @@ title: Middleware
 
 Middleware is like MITM. It can *intercept* **requests** before they are processed by handlers, and **responses** before they are sent to the client/browser.
 
-Tremolo has two kinds of middleware that can be created. Which are `on_request` and `on_send`.
+Tremolo has two kinds of middleware that can be created. Which are `on_request` and `on_response`.
 
 The `on_request` allows you to put certain code globally at the very front.
 You can filter, authenticate, then halt (if necessary) before the request goes to / is processed by handlers.
+
+Middleware can be used to extend functionality. For example, [tremolo-session](https://github.com/nggit/tremolo-session) is built upon middleware.
 
 Let's say we have a `hello_world` handler:
 
@@ -87,33 +89,8 @@ Server: Tremolo
 Request method FOO is not supported!
 ```
 
-You may need to use `on_send` for but not limited to, implementing caching.
-
-Consider the following code:
-
-```python
-@app.on_send
-async def my_data_middleware(**server):
-    data = server['context'].data
-
-    print(data)
-```
-
-Here is a `print` result of the data before it is sent to the client in the form of a tuple pair, `(name, data)`.
-
-```python
-('header', b'HTTP/1.1 200 OK\r\nDate: Thu, 09 Feb 2023 04:00:36 GMT\r\nServer: Tremolo\r\nTransfer-Encoding: chunked\r\nContent-Type: text/html; charset=utf-8\r\nConnection: keep-alive\r\n\r\n')
-('body', b'Hello')
-('body', b'World!')
-('body', b'')
-```
-
-Since the `on_send` handler may be called multiple times, the `name` field is handy to tell if it is `header` or `body` part.
-
-Note that the `body` in this middleware is original data / pre-encoded (eg in the case of `Transfer-encoding: chunked`).
-
 ## Decorators
-In addition to `on_request` and `on_send` middleware, there are also decorators such as `on_connect` and `on_close`.
+In addition to `on_request` and `on_response` middleware, there are also decorators such as `on_connect` and `on_close`.
 
 ```python
 @app.on_close
