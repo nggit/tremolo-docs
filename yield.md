@@ -38,6 +38,8 @@ async def hello_world(**server):
         yield bytes([b])
 ```
 
+![Tremolo yield stream=True](https://raw.githubusercontent.com/nggit/tremolo-docs/main/assets/images/tremolo-yield-stream-true.gif)
+
 `stream=False` can be used to disable response streaming. This will make the yields buffered; meaning performance may improve on multiple yields.
 
 ```python
@@ -49,6 +51,8 @@ async def hello_world(stream=False, **server):
 
         yield bytes([b])
 ```
+
+![Tremolo yield stream=False](https://raw.githubusercontent.com/nggit/tremolo-docs/main/assets/images/tremolo-yield-stream-false.gif)
 
 ## Send RAW data
 In some cases you may want to send RAW data. You can use the `send()` method of the [Response object](response.html).
