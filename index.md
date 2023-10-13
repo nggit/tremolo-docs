@@ -52,6 +52,7 @@ With only 2500 lines of code, with no dependencies other than the [Python Standa
 * [Resumable downloads](https://nggit.github.io/tremolo-docs/resumable-downloads.html)
 * Framework features; routing, middleware, etc
 * ASGI server
+* PyPy compatible
 
 ## Example
 Here is a complete *hello world* example in case you missed the usual `return`.
@@ -170,8 +171,6 @@ asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
 ```
 
 ## Installing
-Tremolo is still in the early stages of development. But you can try installing it if you like.
-
 ```
 python3 -m pip install --upgrade tremolo
 ```
