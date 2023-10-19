@@ -24,7 +24,7 @@ async def hello_world_x(**server):
 Note that both `return` and `end()` are only suitable for sending relatively small amounts of data at a time.
 
 ## Disable Response Streaming on "yield"
-By default, every `yield` will be sent to the client (browser) immediately, even if it is a single byte. This behavior is noticeable in web browser, not in curl.
+By default, every `yield` will be sent to the client immediately, even if it is a single byte. This behavior is noticeable in web browser, not in curl.
 
 The following code will print `Hello, World!` to the browser, each character + 0.2 second delay in sequence:
 
