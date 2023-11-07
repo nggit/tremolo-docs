@@ -15,7 +15,7 @@ Validation must be done on your side. For example by using the [Middleware](midd
 Deploying Tremolo behind a CDN like Cloudflare, or using a reverse proxy / TLS termination proxy like Nginx is preferred. It can help mitigate malicious header attacks.
 
 ## Avoid high memory consumptions
-You should be careful when sing `request.body()`. It's not memory wise. Consider using `request.read()` instead. Otherwise, you have to set [client_max_body_size](configuration.html#client_max_body_size) to a lower best value.
+You should be careful when using `request.body()`. It's not memory wise. Consider using `request.read()` instead. Otherwise, you have to set [client_max_body_size](configuration.html#client_max_body_size) to a lower best value.
 
 When using `request.form()`, you can limit how much data that allowed to enter internal form parser. You can set it with the `limit` argument.
 
