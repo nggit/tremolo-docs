@@ -73,3 +73,21 @@ And the proper way is by using the `set_cookie`. It provides a convenient parame
 ```python
 server['response'].set_cookie('a', 'xyz', expires=3600)
 ```
+
+## Get the values of multiple fields as a list
+In HTTP, some fields are allowed to have the same name, such as `Cookie`, `Accept-Encoding`, etc.
+
+In such special cases, `request.headers.getlist()` can be used to retrieve all values at once.
+
+In the request header as follows:
+
+```
+Accept-Encoding: br
+Accept-Encoding: gzip, deflate
+```
+
+`print(request.headers.getlist(b'accept-encoding'))` will return a list with three items:
+
+```
+[b'br', b'gzip', d'deflate']
+```
