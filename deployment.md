@@ -35,7 +35,7 @@ Then to execute Python in `CMD` as a user `app`:
 su -c 'exec python3 hello.py' - app
 ```
 
-If translated into a full Dockerfile, it becomes as follows (adjust to your project):
+If translated into a full `Dockerfile`, it becomes as follows (adjust to your project):
 
 ```
 FROM alpine:3.18
