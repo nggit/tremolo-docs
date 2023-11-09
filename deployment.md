@@ -5,13 +5,13 @@ title: Deploy to Production
 
 Tremolo app is very easy to deploy. It's just as simple as running a single script:
 
-```python
+```
 python3 hello.py
 ```
 
 Tremolo does not differentiate between development/production mode server. By default the built-in server is intended for production.
 
-Although the use of TLS termination like Nginx is preferred. This will help reduce encryption/CPU load, rather than using the [ssl](https://nggit.github.io/tremolo-docs/configuration.html#ssl) option in Tremolo/Python. Also adds further protection from crafty clients.
+Although the use of TLS termination proxy like Nginx is preferred. This will help reduce encryption/CPU load, rather than using the [ssl](https://nggit.github.io/tremolo-docs/configuration.html#ssl) option in Tremolo/Python. Also adds further protection from crafty clients.
 
 ## Secure Deployment with Docker
 By default, a container uses the unprivileged root. Which is a root user with limited set of capabilities.
