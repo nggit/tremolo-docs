@@ -92,7 +92,7 @@ Request method FOO is not supported!
 ## Decorators
 In addition to `on_request` and `on_response` middleware, there are also decorators such as `on_connect` and `on_close`.
 
-They are actually part of the Middleware. But will rarely be used in most applications. These additional controls are needed for example when you create a proxy application based on Tremolo.
+They are actually part of the Middleware. But will rarely be used in most applications. They provide you more control, for example when you create a proxy application based on Tremolo.
 
 ```python
 @app.on_close
