@@ -39,6 +39,9 @@ By using the `debug=True`, A backtrace will also included in the error message. 
 
 If you do not pass this parameter, the default value is `False`.
 
+### reload
+You can set this to `True` to enable worker reloading on code changes. Only Intended for development.
+
 ### ws
 To Disable built-in WebSocket support, you can set this to `False`. The default is `True` or enabled.
 
@@ -93,6 +96,22 @@ The default is `30` seconds.
 Maximum number of keep-alive connections.
 
 The defaults is `512` (connections/worker).
+
+### app_handler_timeout
+The common term for this is "maximum execution time". The default is `120` seconds.
+
+This is a dedundant protection. To make sure the task on the handler / ASGI app ends within a certain amount of time, thus preventing poorly written applications, or unwanted never-ending stream scenarios. Especially if it has not been covered by any of the timeouts above.
+
+Example:
+```python
+@app.route('/')
+    await asyncio.sleep(123)
+
+    # will be killed before it even returns value
+    return 'OK'
+```
+
+Note that the upgraded connection will not be affected. And will not work outside the async context (blocking calls).
 
 ### server_name
 Set the `Server` field in the response header.
