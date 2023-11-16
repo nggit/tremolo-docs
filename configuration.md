@@ -111,7 +111,7 @@ Example:
     return 'OK'
 ```
 
-Note that the upgraded connection will not be affected. And will not work outside the async context (blocking calls).
+Note that the WebSocket/upgraded connection will not be affected. And will not work outside the async context (blocking calls).
 
 ### server_name
 Set the `Server` field in the response header.
