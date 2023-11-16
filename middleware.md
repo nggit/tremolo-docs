@@ -99,3 +99,16 @@ They are actually part of the Middleware. But will rarely be used in most applic
 async def on_close(**server):
     print('=== CLOSED ===')
 ```
+
+## Middleware Sequences
+These are middleware flows assuming the return value `None` is used on them.
+
+```
+Request  --> on_connect[1,2,3] --> on_request[1,2,3]
+                                         |
+                                         |
+                                      handler
+                                         |
+                                         v
+Response <-- on_close[3,2,1]   --> on_response[3,2,1]
+```
