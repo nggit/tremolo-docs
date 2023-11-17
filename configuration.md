@@ -82,6 +82,9 @@ Maximum body on requests such as POST / file upload.
 
 The default is `2 * 1048576`, or **2MiB**.
 
+### client_max_header_size
+The default is `8192`, or **8KiB**.
+
 ### request_timeout
 The maximum period between when the client connects, until the server receives the data.
 
