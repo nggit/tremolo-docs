@@ -105,10 +105,13 @@ These are middleware flows assuming the return value `None` is used on them.
 
 ```
 Request  --> on_connect[1,2,3] --> on_request[1,2,3]
-                                         |
+         |                      |        |
+         -->    Keep-Alive    >--        |
                                          |
                                       handler
                                          |
                                          v
 Response <-- on_close[3,2,1]   <-- on_response[3,2,1]
+          |                      |
+          --<    Keep-Alive    <--
 ```
