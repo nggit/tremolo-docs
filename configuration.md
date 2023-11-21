@@ -8,6 +8,8 @@ Below are some parameters that can be used in `app.listen()` or `app.run()`.
 ### host
 E.g. `localhost`, `127.0.0.1`, etc.
 
+In Tremolo, `::` means listen on all IPv6 interfaces, but also enables dual-stack support.
+
 ### port
 E.g. `8000`, `8080`, etc.
 
