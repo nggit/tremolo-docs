@@ -7,6 +7,7 @@ title: About
 # Tremolo
 
 [![codecov](https://codecov.io/gh/nggit/tremolo/branch/master/graph/badge.svg?token=SC8NVWN0F1)](https://codecov.io/gh/nggit/tremolo)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=nggit_tremolo&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=nggit_tremolo)
 
 Tremolo is a [stream-oriented](https://nggit.github.io/tremolo-docs/yield.html), asynchronous, programmable HTTP server written in pure Python. It can also serve as an [ASGI server](#asgi-server).
 
@@ -42,7 +43,7 @@ And other use cases…
 ## Features
 Tremolo is only suitable for those who value [minimalism](https://en.wikipedia.org/wiki/Minimalism_%28computing%29) and stability over features.
 
-With only 2500 lines of code, with no dependencies other than the [Python Standard Library](https://docs.python.org/3/library/index.html), it gives you:
+With only **3k** lines of code, with **no dependencies** other than the [Python Standard Library](https://docs.python.org/3/library/index.html), it gives you:
 
 * HTTP/1.x with [WebSocket support](https://nggit.github.io/tremolo-docs/websocket.html)
 * Keep-Alive connections with [configurable limit](https://nggit.github.io/tremolo-docs/configuration.html#keepalive_connections)
@@ -50,7 +51,7 @@ With only 2500 lines of code, with no dependencies other than the [Python Standa
 * [Stream multipart uploads](https://nggit.github.io/tremolo-docs/body.html#multipart)
 * Download/upload speed throttling
 * [Resumable downloads](https://nggit.github.io/tremolo-docs/resumable-downloads.html)
-* Framework features; routing, middleware, etc
+* Framework features; routing, middleware, etc.
 * ASGI server
 * PyPy compatible
 
@@ -141,12 +142,10 @@ python3 -m tremolo --log-level ERROR example:app
 
 You will find that Tremolo is reasonably fast.
 
-What's interesting is that this may become different when [CPython becomes faster](https://devblogs.microsoft.com/python/python-311-faster-cpython-team/),
-or another faster Python implementation comes along.
+However, it should be noted that bottlenecks often occur on the application side.
+Which means that in real-world usage, throughput reflects more on the application than the server.
 
-All I can say is that Tremolo is built with simplicity in mind, so performance will naturally follow.
-
-## Misc
+## Misc.
 Tremolo utilizes `SO_REUSEPORT` (Linux 3.9+) to load balance worker processes.
 
 ```python
