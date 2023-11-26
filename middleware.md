@@ -44,9 +44,6 @@ async def my_request_middleware(**server):
     request = server['request']
     response = server['response']
 
-    if not request.is_valid
-        raise BadRequest
-
     if request.method not in (b'GET', b'POST'):
         response.set_status(405, 'Method Not Allowed')
         response.set_content_type('text/plain')
