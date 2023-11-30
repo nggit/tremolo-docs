@@ -25,7 +25,7 @@ If you sure / only need short amount of form data, eg. under 64KiB, you can do t
 form_data = await request.form(limit=65536)
 ```
 
-Note that if the coming request body higher than the `limit`, it will return an empty `{}`.
+Note that if the coming request body higher than the `limit`, it will raise `ValueError`.
 The default `limit` is 8MiB.
 
 By lowering its value will help mitigating DoS attacks.
