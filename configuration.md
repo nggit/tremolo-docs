@@ -105,7 +105,7 @@ The defaults is `512` (connections/worker).
 ### app_handler_timeout
 The common term for this is "maximum execution time". The default is `120` seconds.
 
-This is a dedundant protection. To make sure the task on the handler / ASGI app ends within a certain amount of time, thus preventing poorly written applications, or unwanted never-ending stream scenarios. Especially if it has not been covered by any of the timeouts above.
+This is a redundant protection. To make sure the task on the handler / ASGI app ends within a certain amount of time, thus preventing poorly written applications, or unwanted never-ending stream scenarios. Especially if it has not been covered by any of the timeouts above.
 
 Example:
 ```python
