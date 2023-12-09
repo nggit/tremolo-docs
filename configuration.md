@@ -49,6 +49,11 @@ To Disable built-in WebSocket support, you can set this to `False`. The default 
 
 To disable it in the ASGI server mode, use `--no-ws`.
 
+### ws_max_payload_size
+Maximum payload size for the built-in WebSocket.
+
+The default is `2 * 1048576`, or **2MiB**.
+
 ### log_level
 The default is `'DEBUG'` (string). For more info, please check [https://docs.python.org/3/library/logging.html#levels](https://docs.python.org/3/library/logging.html#levels).
 
@@ -86,6 +91,11 @@ The default is `2 * 1048576`, or **2MiB**.
 
 ### client_max_header_size
 The default is `8192`, or **8KiB**.
+
+### max_queue_size
+Maximum number of [buffers](#buffer_size) in the queue.
+
+The default is `128`.
 
 ### request_timeout
 The maximum period between when the client connects, until the server receives the data.
