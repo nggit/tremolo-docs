@@ -39,6 +39,10 @@ QUERY_STRING:   bytearray(b'a=1&b=2')
 VERSION:        bytearray(b'1.1')
 ```
 
-Note that `request.ip` is not security wise. It will take the ip address from `X-Forwarded-For` / HTTP header when available.
+Note that tremolo focuses on *bytes-like*, except in some dict objects like `request.query`, `request.cookies`, and `request.form()`.
+
+We do this for the sake of interoperability, to reduce the possibility of encoding - decoding back and forth, etc. With the tradeoff of being a bit inconvenient.
+
+FYI, `request.ip` is not security wise. It will take the ip address from `X-Forwarded-For` / HTTP header when available.
 
 It only becomes handy when Tremolo is deployed behind a proxy server, otherwise `request.client[0]` should be used.
