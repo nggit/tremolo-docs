@@ -110,7 +110,7 @@ The default is `30` seconds.
 ### keepalive_connections
 Maximum number of keep-alive connections.
 
-The defaults is `512` (connections/worker).
+The defaults is `512` (connections/worker). The oldest, or **513th** will be kicked out.
 
 ### app_handler_timeout
 The common term for this is "maximum execution time". The default is `120` seconds.
