@@ -66,3 +66,7 @@ CMD ["sh", "-c", "chown -R app:app /app; \
     setcap 'cap_net_bind_service=ep' $( readlink -f /usr/bin/python3 ); \
     su -c 'exec python3 hello.py' - app"]
 ```
+
+You can also further hardening by dropping capabilities such as `SYS_CHROOT`, `NET_RAW`, `SETPCAP`, etc.
+
+You can do your own research regarding your application needs.
