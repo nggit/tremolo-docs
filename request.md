@@ -39,7 +39,7 @@ QUERY_STRING:   bytearray(b'a=1&b=2')
 VERSION:        bytearray(b'1.1')
 ```
 
-Note that tremolo focuses on *bytes-like*, except in some dict objects like `request.query`, `request.cookies`, and `request.form()`.
+Note that Tremolo focuses on *bytes-like*, **except** in some dict objects like `request.query`, `request.cookies`, and `request.form()`.
 
 We do this for the sake of interoperability, to reduce the possibility of encoding - decoding back and forth, etc. With the tradeoff of being a bit inconvenient.
 
