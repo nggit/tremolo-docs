@@ -120,6 +120,7 @@ This is a redundant protection. To make sure the task on the handler / ASGI app 
 Example:
 ```python
 @app.route('/')
+async def my_handler(**server):
     await asyncio.sleep(123)
 
     # will be killed before it even returns value
