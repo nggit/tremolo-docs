@@ -24,6 +24,8 @@ After that being called (at least once), then the form data will also available 
 server['request'].params['post']
 ```
 
+The request body will also be **cached**, allowing `request.body()` to be *awaited* afterwards.
+
 Here's a simple example of how to handle login form:
 
 ```python
