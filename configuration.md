@@ -24,6 +24,11 @@ Note that this setting is not available in ASGI server mode.
 ### worker_num
 The default is `1`.
 
+### limit_memory
+Restart the worker if this limit (in KiB) is reached (Linux-only).
+
+Defaults to `0` or unlimited.
+
 ### backlog
 The default is `100`.
 
