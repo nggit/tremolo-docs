@@ -6,7 +6,7 @@ title: Request Object
 
 `server['request']` is basically an instantiation of [HTTPRequest](https://github.com/nggit/tremolo/blob/master/tremolo/lib/http_request.py) class.
 
-Here are some of available objects in addition to those in [Headers and Cookies](headers.html) and [Body and POST](body.html):
+Here are some of interesting objects in addition to those in [Headers and Cookies](headers.html) and [Body and POST](body.html):
 
 ```python
 @app.route('/hello')
@@ -41,7 +41,7 @@ VERSION:        bytearray(b'1.1')
 
 Note that Tremolo focuses on *bytes-like*, **except** in some dict objects like `request.query`, `request.cookies`, and `request.form()`.
 
-We do this for the sake of interoperability, to reduce the possibility of encoding - decoding back and forth, etc. With the tradeoff of being a bit inconvenient.
+This is for maximum interoperability, to reduce the possibility of encoding - decoding back and forth, etc. With the tradeoff of being a bit inconvenient.
 
 FYI, `request.ip` is not security wise. It will take the ip address from `X-Forwarded-For` / HTTP header when available.
 
