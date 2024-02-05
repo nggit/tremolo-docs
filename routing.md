@@ -42,6 +42,9 @@ The regex syntax above uses *named groups* which you can learn more about at [ht
 
 You can always check what kind of data is received if using regex in `request.params['path']`. It's a dict object.
 
+It is worth noting that the routing has a limitation, which is that you cannot capture the beginning of the path.
+So it requires a prefix like `/page/` because Tremolo makes use of prefixes for caching.
+
 ## Custom 404 page
 ```python
 @app.error(404)
