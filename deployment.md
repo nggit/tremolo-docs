@@ -30,6 +30,8 @@ With the `app` (non-root) user created, we cannot bind ports below 1024. Unless 
 setcap 'cap_net_bind_service=ep' $( readlink -f /usr/bin/python3 )
 ```
 
+This is possible because the `SETFCAP` capability is enabled by default.
+
 Then to execute Python in `CMD` as a user `app`:
 ```
 su -c 'exec python3 hello.py' - app
