@@ -28,7 +28,7 @@ Alternatively, you can use *async iterator* instead of the `while` loop. This wi
 ```python
     # ...
 
-    async for data in websocket:
+    async for message in websocket:
         await websocket.send(f'You said: {message}')
 ```
 
