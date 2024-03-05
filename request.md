@@ -16,6 +16,7 @@ async def hello_world(**server):
     print('REMOTE_ADDR:',    request.ip)
     print('HTTP_HOST:',      request.host)
     print('REQUEST_METHOD:', request.method)
+    print('REQUEST_SCHEME:', request.scheme)
     print('REQUEST_URI:',    request.url)
     print('PATH:',           request.path)
     print('QUERY:',          request.query)
@@ -32,6 +33,7 @@ async def hello_world(**server):
 REMOTE_ADDR:    b'127.0.0.1'
 HTTP_HOST:      bytearray(b'localhost:8000')
 REQUEST_METHOD: bytearray(b'GET')
+REQUEST_SCHEME: b'http'
 REQUEST_URI:    bytearray(b'/hello?a=1&b=2')
 PATH:           bytearray(b'/hello')
 QUERY:          {'a': ['1'], 'b': ['2']}
