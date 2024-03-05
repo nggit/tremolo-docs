@@ -77,8 +77,13 @@ async def ws_handler(websocket=None, request=None, stream=False, **_):
         <ul id="messages"></ul>
         <script>
     """
+    ws_scheme = b'ws'
+
+    if request.scheme == b'https':
+        ws_scheme = b'wss'
+
     yield b"\
-        var socket = new WebSocket('ws://%s/');" % request.host
+        var socket = new WebSocket('%s://%s/');" % (ws_scheme, request.host)
     yield b"""
             var messages = document.getElementById('messages');
             var sendButton = document.getElementById('send');
@@ -103,8 +108,8 @@ async def ws_handler(websocket=None, request=None, stream=False, **_):
     """
 
 if __name__ == '__main__':
-    # don't forget to disable debug on production!
-    app.run('0.0.0.0', 8000, debug=True)
+    # don't forget to disable debug and reload on production!
+    app.run('0.0.0.0', 8000, debug=True, reload=True)
 ```
 
 If you think the built-in WebSocket support does not fulfill the features you expect, or want to use an external WebSocket server, you can disable it with `ws=False` in the framework [configuration](configuration.html#ws).
