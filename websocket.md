@@ -24,6 +24,14 @@ async def ws_handler(websocket=None, **server):
         await websocket.send(f'You said: {message}')
 ```
 
+Alternatively, you can use *async iterator* instead of the `while` loop. This will also perform `websocket.accept()` under the hood:
+```python
+    # ...
+
+    async for data in websocket:
+        await websocket.send(f'You said: {message}')
+```
+
 Here's a working example of a WebSocket Chat:
 
 ```python
