@@ -21,7 +21,9 @@ Most projects will be fine with that.
 But to make it more difficult for attackers to gain access to bare metal / container breakout, it is necessary to create a non-root user in the container for example with:
 
 ```
-useradd --home-dir /app --create-home --user-group app
+# useradd --home-dir /app --create-home --user-group app
+# or (Alpine/Busybox's version):
+adduser -Dh /app -u 1000 app app
 ```
 
 With the `app` (non-root) user created, we cannot bind ports below 1024. Unless we `setcap` the Python binary first:
@@ -40,21 +42,21 @@ su -c 'exec python3 hello.py' - app
 If translated into a full `Dockerfile`, it becomes as follows (adjust to your project):
 
 ```
-FROM alpine:3.18
+FROM alpine:3.19
 
 # update system
 RUN apk update && apk upgrade
 
 # install required packages
-RUN apk add libcap python3 shadow
+RUN apk add libcap python3
 
-# create a non-root user 'app'
-RUN useradd --home-dir /app --create-home --user-group app && \
-    echo "export PATH=/app/.local/bin:$PATH" > /app/.profile
+# create a non-root user app:app
+RUN adduser -Dh /app -u 1000 app app
 
-# install pip and python packages locally for user 'app'
-RUN su -c 'python3 -m ensurepip; python3 -m pip install tremolo; \
-    python3 -m pip install uvloop' - app
+# install python packages
+RUN python3 -m venv --system-site-packages /usr/local; \
+    python3 -m pip install tremolo; \
+    python3 -m pip install uvloop
 
 # clean up
 RUN rm -rf /tmp/* /var/cache/apk/*
