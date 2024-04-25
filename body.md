@@ -68,7 +68,7 @@ Login success!
 ```
 
 ## Multipart
-You can *stream* multipart through the `server['request'].files()` *async generator*. Each will return a tuple object `(info, data)`.
+You can *stream* multipart through the `request.files()` *async generator*. Each will return a tuple object `(info, data)`.
 
 ```python
 @app.route('/upload')
@@ -93,7 +93,7 @@ Then the above snippet will print something like:
 
 ## Stream the request body / receive upload
 
-`POST` data other than forms should be consumed with `server['request'].read()` which is an *async generator*, or `server['request'].body()` which is a *coroutine object*.
+`POST` data other than forms should be consumed with `request.stream()` which is an *async generator*, or `request.body()` which is a *coroutine object*.
 
 Here's a code example to receive a binary data upload, then save it.
 
@@ -102,7 +102,7 @@ Here's a code example to receive a binary data upload, then save it.
 async def upload(**server):
     with open('/save/to/image_uploaded.png', 'wb') as f:
         # read body chunk by chunk
-        async for data in server['request'].read():
+        async for data in server['request'].stream():
 
             # write to file on each chunk
             f.write(data)
@@ -146,7 +146,7 @@ app.run('0.0.0.0', 8000, client_max_body_size=100 * 1048576)
 Now you should be able to upload files for up to 100MiB in size.
 
 ## Read the request body up to a certain size
-`read()` or `read(size=None)` is an alias of `stream()`, an *async generator*. If the `size` parameter is provided, it becomes *awaitable*.
+`read(size)` is an *awaitable* that can be used to consume the request body instead of using `request.stream()` or `request.body()`.
 
 ```python
 data = await server['request'].read(100)
