@@ -98,7 +98,8 @@ The default is `2 * 1048576`, or **2MiB**.
 The default is `8192`, or **8KiB**.
 
 ### max_queue_size
-Maximum number of [buffers](#buffer_size) in the queue.
+Maximum number of [buffers](#buffer_size) in the queue, for a connection.
+Exceeding these limits the connection will be aborted.
 
 The default is `128`.
 
