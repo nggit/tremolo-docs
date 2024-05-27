@@ -20,6 +20,7 @@ or alternative version:
 async def hello_world(response=None, **server):
     await response.write(b'Hello')
     await response.write(b'World!')
+    await response.write(b'')
 
     # optional. FYI, it is required on middleware
     response.close()
