@@ -54,3 +54,42 @@ async def hello_world(a=1, rate=2097152, buffer_size=32768, **server):
     yield b'Hello'
     yield b'World!'
 ```
+
+## Server behavior regarding the return value of the handler
+
+### 1. return b''
+```python
+@app.route('/hello')
+async def hello_world(**server):
+    return b'Hello, World!'
+```
+If the handler returns a *string* / *bytes*-like, the data will be sent as a response body along with the `Content-Length`.
+The connection will be **closed with respect to keep-alive**.
+
+### 2. return None
+```python
+@app.route('/hello')
+async def hello_world(**server):
+    pass
+```
+If the handler returns nothing, or None, the connection will be **forcibly closed**, without sending any data to the client, not even headers.
+
+Just like doing `response.close()`.
+
+### 3. return anything, e.g. True
+```python
+@app.route('/hello')
+async def hello_world(**server):
+    // do something
+    return True
+```
+If the handler returns something other than the above, such as `True`, the connection **will not be closed**.
+This assumes you will be managing the connection manually.
+
+You will see a log:
+```
+handler hello_world has exited with the connection possibly left open
+```
+Be careful that the connection may hang forever, and not be subject to keep-alive termination.
+In other words, the client can abuse by not closing the connection.
+
