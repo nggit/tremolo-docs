@@ -63,7 +63,7 @@ async def hello_world(a=1, rate=2097152, buffer_size=32768, **server):
 async def hello_world(**server):
     return b'Hello, World!'
 ```
-If the handler returns a *string* / *bytes*-like, the data will be sent as a response body along with the `Content-Length`.
+If the handler returns a *string* / *bytes*-like, the data will be sent as a response body along with the `Content-Length` (for HTTP/1.0) or `Transfer-Encoding: chunked` (for HTTP/1.1).
 The connection will be **closed with respect to keep-alive**.
 
 ### 2. return None
