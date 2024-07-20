@@ -118,7 +118,7 @@ Maximum number of keep-alive connections.
 
 The defaults is `512` (connections/worker). The oldest, or **513th** will be kicked out.
 
-### max-connections
+### max_connections
 Maximum number of connections (per worker).
 
 Defaults to `1000`. The 1001st client will immediately be aborted. If you limit more than this, you may be subject to file descriptor limits by the OS.
