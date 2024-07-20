@@ -118,6 +118,11 @@ Maximum number of keep-alive connections.
 
 The defaults is `512` (connections/worker). The oldest, or **513th** will be kicked out.
 
+### max-connections
+Maximum number of connections (per worker).
+
+Defaults to `1000`. The 1001st client will immediately be aborted. If you limit more than this, you may be subject to file descriptor limits by the OS.
+
 ### app_handler_timeout
 The common term for this is "maximum execution time". The default is `120` seconds.
 
