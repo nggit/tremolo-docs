@@ -3,7 +3,9 @@ layout: page
 title: Tasks and Contexts
 ---
 
-You can create tasks using the [server['loop']](https://docs.python.org/3/library/asyncio-eventloop.html). Consider the following example:
+You can create asynchronous tasks using the [loop.create_task()](https://docs.python.org/3/library/asyncio-eventloop.html#asyncio.loop.create_task) directly or `request.protocol.create_task()`. The difference is that the latter is tracked by the server and will be canceled when the client disconnects.
+
+Consider the following example:
 
 ```python
 import asyncio
@@ -18,14 +20,11 @@ async def my_coro(fut):
 
 @app.route('/hello')
 async def hello_world(**server):
-    tasks = server['context'].tasks
+    request = server['request']
     loop = server['loop']
 
     fut = loop.create_future()
-
-    tasks.append(
-        loop.create_task(my_coro(fut))
-    )
+    request.protocol.create_task(my_coro(fut))
 
     yield b'Processing... '
 
@@ -37,19 +36,7 @@ if __name__ == '__main__':
     app.run('0.0.0.0', 8000, debug=True)
 ```
 
-The code above runs an *awaitable* `my_coro` using `loop.create_task()`. So that it does not wait for `my_coro` in the main task, not blocking the following `yield b'Processing...` to be executed.
-
-Appending tasks to `server['context'].tasks` is not required. But it will help Tremolo to cancel pending tasks on client disconnect.
-
-For convenience, you can use the `ServerTasks.create`. Just add `tasks=None` placeholder parameter in the [handler](handlers.html) to use it:
-
-```python
-@app.route('/hello')
-async def hello_world(tasks=None, **server):
-    # ...
-
-    task = tasks.create(my_coro(fut))
-```
+If you want to execute the synchronous tasks instead, you can look at the [awaiter module](https://pypi.org/project/awaiter/).
 
 ## Contexts
 `server['context']` is a mutable object (think a `dict` with a dot notation, or a [SimpleNamespace](https://docs.python.org/3/library/types.html#types.SimpleNamespace)).
