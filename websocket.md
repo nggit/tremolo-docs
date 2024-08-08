@@ -37,7 +37,7 @@ Here's a working example of a WebSocket Chat: [https://github.com/nggit/tremolo/
 ## Close the connection gracefully
 When a client initiates a connection closure or closes a browser tab, Tremolo will close the connection at the transport level **without sending the websocket close code**.
 
-You can for example use `websocket.close(code=1000)`:
+To close the connection gracefully, you can for example use `websocket.close(code=1000)`:
 
 ```python
     from tremolo.exceptions import WebSocketClientClosed
