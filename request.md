@@ -38,7 +38,7 @@ REQUEST_URI:    bytearray(b'/hello?a=1&b=2')
 PATH:           bytearray(b'/hello')
 QUERY:          {'a': ['1'], 'b': ['2']}
 QUERY_STRING:   bytearray(b'a=1&b=2')
-VERSION:        bytearray(b'1.1')
+VERSION:        b'1.1'
 ```
 
 Note that Tremolo focuses on *bytes-like*, **except** in some dict objects like `request.query`, `request.cookies`, and `request.form()`.
