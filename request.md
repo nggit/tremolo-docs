@@ -31,13 +31,13 @@ async def hello_world(**server):
 
 ```
 REMOTE_ADDR:    b'127.0.0.1'
-HTTP_HOST:      bytearray(b'localhost:8000')
-REQUEST_METHOD: bytearray(b'GET')
+HTTP_HOST:      b'localhost:8000'
+REQUEST_METHOD: b'GET'
 REQUEST_SCHEME: b'http'
-REQUEST_URI:    bytearray(b'/hello?a=1&b=2')
-PATH:           bytearray(b'/hello')
+REQUEST_URI:    b'/hello?a=1&b=2'
+PATH:           b'/hello'
 QUERY:          {'a': ['1'], 'b': ['2']}
-QUERY_STRING:   bytearray(b'a=1&b=2')
+QUERY_STRING:   b'a=1&b=2'
 VERSION:        b'1.1'
 ```
 
