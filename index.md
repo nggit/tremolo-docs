@@ -187,4 +187,4 @@ coverage html # to generate html reports
 ```
 
 ## License
-MIT
+MIT License
