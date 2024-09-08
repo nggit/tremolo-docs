@@ -6,9 +6,9 @@ title: Configuration
 Below are some parameters that can be used in `app.listen()` or `app.run()`.
 
 ### host
-E.g. `localhost`, `127.0.0.1`, etc.
+E.g. `'localhost'`, `'127.0.0.1'`, etc.
 
-In Tremolo, `::` means listen on all IPv6 interfaces, but also enables dual-stack support.
+In Tremolo, `'::'` means listen on all IPv6 interfaces, but also enables dual-stack support.
 
 ### port
 E.g. `8000`, `8080`, etc.
@@ -61,6 +61,12 @@ The default is `2 * 1048576`, or **2MiB**.
 
 ### log_level
 The default is `'DEBUG'` (string). For more info, please check [https://docs.python.org/3/library/logging.html#levels](https://docs.python.org/3/library/logging.html#levels).
+
+## event_loop_policy
+A fully qualified event loop policy name. E.g. `'asyncio.DefaultEventLoopPolicy'` or `'uvloop.EventLoopPolicy'`.
+It expects the respective module to already be present.
+
+The default is `'asyncio.DefaultEventLoopPolicy'`.
 
 ### download_rate
 Limits the sending speed to the client / download speed per second.
