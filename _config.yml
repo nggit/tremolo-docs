@@ -6,3 +6,20 @@ url: https://nggit.github.io/tremolo-docs
 
 aux_links: # remove if you don't want this link to appear on your pages
   Template Repository: https://nggit.github.io/tremolo-docs
+
+callouts_level: quiet # or loud
+callouts:
+  highlight:
+    color: yellow
+  important:
+    title: Important
+    color: blue
+  new:
+    title: New
+    color: green
+  note:
+    title: Note
+    color: purple
+  warning:
+    title: Warning
+    color: red
