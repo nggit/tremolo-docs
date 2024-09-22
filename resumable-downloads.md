@@ -26,5 +26,3 @@ async def download(**server):
     # optional, to enable keep-alive
     return True
 ```
-Note that this built-in feature *just works*.
-It does not use a shiny module like `aiofiles` for the sake of simplicity.
