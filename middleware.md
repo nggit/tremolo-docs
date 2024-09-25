@@ -10,7 +10,7 @@ Tremolo has two kinds of middleware that can be created. Which are `on_request` 
 The `on_request` allows you to put certain code globally at the very front.
 You can filter, authenticate, then halt (if necessary) before the request goes to / is processed by handlers.
 
-Middleware can be used to extend functionality. For example, [tremolo-session](https://github.com/nggit/tremolo-session) is built upon middleware.
+Middleware can be used to extend functionality. For example, [httpout](https://github.com/nggit/httpout) and [tremolo-session](https://github.com/nggit/tremolo-session) are built upon middleware.
 
 Let's say we have a `hello_world` handler:
 
