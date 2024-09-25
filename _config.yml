@@ -5,9 +5,9 @@ theme: just-the-docs
 url: https://nggit.github.io/tremolo-docs
 
 aux_links: # remove if you don't want this link to appear on your pages
-  Template Repository: https://nggit.github.io/tremolo-docs
+  Project Repository: https://github.com/nggit/tremolo
+  Docs Repository: https://github.com/nggit/tremolo-docs
 
-callouts_level: quiet # or loud
 callouts:
   highlight:
     color: yellow
