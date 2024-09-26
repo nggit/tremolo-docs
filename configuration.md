@@ -62,11 +62,11 @@ The default is `2 * 1048576`, or **2MiB**.
 ### log_level
 The default is `'DEBUG'` (string). For more info, please check [https://docs.python.org/3/library/logging.html#levels](https://docs.python.org/3/library/logging.html#levels).
 
-### event_loop_policy
-A fully qualified event loop policy name. E.g. `'asyncio.DefaultEventLoopPolicy'` or `'uvloop.EventLoopPolicy'`.
+### loop
+A fully qualified event loop name. E.g. `'asyncio'` or `'asyncio.SelectorEventLoop'`.
 It expects the respective module to already be present.
 
-The default is `'asyncio.DefaultEventLoopPolicy'`.
+The default is `'asyncio'`.
 
 ### download_rate
 Limits the sending speed to the client / download speed per second.
