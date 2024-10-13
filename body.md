@@ -73,8 +73,9 @@ You can *stream* multipart through the `request.files()` *async generator*. Each
 ```python
 @app.route('/upload')
 async def upload(**server):
-    async for info, data in server['request'].files():
-        print(info, data[:12])
+    async for part in server['request'].files():
+        part['data'] = part['data'][:12]
+        print(part)
 
     return 'Done.'
 ```
@@ -86,9 +87,9 @@ curl -X POST -H "Content-Type: multipart/form-data; boundary=myboundary" -F "myt
 Then the above snippet will print something like:
 
 ```python
-{'name': 'mytext'} bytearray(b'dataxxxx')
-{'name': 'myfile', 'filename': 'file.txt', 'type': 'text/plain'} bytearray(b'datayyyy\n')
-{'name': 'myfile2', 'filename': 'image.jpg', 'type': 'image/jpeg'} bytearray(b'\xff\xd8\xff\xe0\x00\x10JFIF\x00\x01')
+{'name': 'mytext', 'data': b'dataxxxx'}
+{'name': 'myfile', 'filename': 'file.txt', 'type': 'text/plain', 'data': b'datayyyy\n'}
+{'name': 'myfile2', 'filename': 'image.jpg', 'type': 'image/jpeg', 'data': b'\xff\xd8\xff\xe0\x00\x10JFIF\x00\x01'}
 ```
 
 ## Stream the request body / receive upload
