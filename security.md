@@ -15,9 +15,9 @@ Validation must be done on your side. For example by using the [Middleware](midd
 Deploying Tremolo behind a CDN like Cloudflare, or using a reverse proxy / TLS termination proxy like Nginx is preferred. It can help mitigate malicious header attacks.
 
 ## Avoid high memory consumptions
-You should be careful when using `request.body()`. It's not memory wise. Consider using `request.read()` instead. Otherwise, you have to set [client_max_body_size](configuration.html#client_max_body_size) to a lower best value.
+You should be careful when using `request.body()`. It's not memory wise. Consider using `request.stream()` instead. Otherwise, you have to set [client_max_body_size](configuration.html#client_max_body_size) to a lower best value.
 
-When using `request.form()`, you can limit how much data that allowed to enter internal form parser. You can set it with the `limit` argument.
+When using `request.form()`, you can limit how much data that allowed to enter internal form parser. You can set it with the `max_size` argument.
 
 If you sure / only need short amount of form data, eg. under 64KiB, you can do the following:
 
@@ -25,7 +25,7 @@ If you sure / only need short amount of form data, eg. under 64KiB, you can do t
 form_data = await request.form(max_size=65536)
 ```
 
-Note that if the coming request body higher than the `limit`, it will raise `ValueError`.
+Note that if the coming request body higher than the `max_size`, it will raise `ValueError`.
 The default `max_size` is 8MiB.
 
 By lowering its value will help mitigating DoS attacks.
