@@ -68,7 +68,7 @@ Login success!
 ```
 
 ## Multipart
-You can *stream* multipart through the `request.files()` *async generator*. Each will return a tuple object `(info, data)`.
+You can *stream* multipart through the `request.files()` *async generator*. Each will return a dict object representing a file.
 
 ```python
 @app.route('/upload')
@@ -79,7 +79,7 @@ async def upload(**server):
 
     return 'Done.'
 ```
-You can try:
+You can try uploading 3 files:
 ```
 curl -X POST -H "Content-Type: multipart/form-data; boundary=myboundary" -F "mytext=dataxxxx" -F "myfile=@file.txt" -F "myfile2=@image.jpg" http://localhost:8000/upload
 ```
@@ -87,9 +87,45 @@ curl -X POST -H "Content-Type: multipart/form-data; boundary=myboundary" -F "myt
 Then the above snippet will print something like:
 
 ```python
-{'name': 'mytext', 'data': b'dataxxxx'}
-{'name': 'myfile', 'filename': 'file.txt', 'type': 'text/plain', 'data': b'datayyyy\n'}
-{'name': 'myfile2', 'filename': 'image.jpg', 'type': 'image/jpeg', 'data': b'\xff\xd8\xff\xe0\x00\x10JFIF\x00\x01'}
+{
+    'name': 'mytext',
+    'data': b'dataxxxx',
+    'eof': True
+}
+{
+    'name': 'myfile',
+    'filename': 'file.txt',
+    'type': 'text/plain',
+    'data': b'datayyyy\n',
+    'eof': True
+}
+{
+    'name': 'myfile2',
+    'filename': 'image.jpg',
+    'type': 'image/jpeg',
+    'data': b'\xff\xd8\xff\xe0\x00\x10JFIF\x00\x01',
+    'eof': True
+}
+```
+You must have noticed the `eof` field. In Tremolo you can limit the *maximum buffer per iteration* with `max_file_size`. The default is `100 * 1048576` or **100MiB**.
+
+This means that if you upload a 300MiB file, it will be represented 3 times, which would look similar to the following:
+```python
+{
+    'name': 'mybigfile',
+    'data': b'AB',
+    'eof': False
+}
+{
+    'name': 'mybigfile',
+    'data': b'CD',
+    'eof': False
+}
+{
+    'name': 'mybigfile',
+    'data': b'EF',
+    'eof': True
+}
 ```
 
 ## Stream the request body / receive upload
