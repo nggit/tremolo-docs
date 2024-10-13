@@ -48,7 +48,7 @@ FROM alpine:3.20
 RUN apk update && apk upgrade
 
 # install required packages
-RUN apk --no-cache add libcap python3
+RUN apk add --no-cache libcap python3
 
 # create a non-root user app:app
 RUN adduser -Dh /app -u 1000 app app
