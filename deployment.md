@@ -29,7 +29,7 @@ adduser -Dh /app -u 1000 app app
 With the `app` (non-root) user created, we cannot bind ports below 1024. Unless we `setcap` the Python binary first:
 
 ```
-setcap 'cap_net_bind_service=ep' $( readlink -f /usr/bin/python3 )
+setcap 'cap_net_bind_service=ep' $(readlink -f /usr/bin/python3)
 ```
 
 This is possible because the `SETFCAP` capability is enabled by default.
@@ -42,13 +42,13 @@ su -c 'exec python3 hello.py' - app
 If translated into a full `Dockerfile`, it becomes as follows (adjust to your project):
 
 ```
-FROM alpine:3.19
+FROM alpine:3.20
 
 # update system
 RUN apk update && apk upgrade
 
 # install required packages
-RUN apk add libcap python3
+RUN apk --no-cache add libcap python3
 
 # create a non-root user app:app
 RUN adduser -Dh /app -u 1000 app app
@@ -67,7 +67,7 @@ WORKDIR /app
 
 ENTRYPOINT ["/usr/bin/env", "--"]
 CMD ["sh", "-c", "chown -R app:app /app; \
-    setcap 'cap_net_bind_service=ep' $( readlink -f /usr/bin/python3 ); \
+    setcap 'cap_net_bind_service=ep' $(readlink -f /usr/bin/python3); \
     su -c 'exec python3 hello.py' - app"]
 ```
 
