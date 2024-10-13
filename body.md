@@ -68,6 +68,8 @@ Login success!
 ```
 
 ## Multipart
+Multipart streaming is designed to receive uploaded files in a memory-friendly manner.
+
 You can *stream* multipart through the `request.files()` *async generator*. Each will return a dict object representing a file.
 
 ```python
