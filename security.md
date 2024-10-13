@@ -22,10 +22,10 @@ When using `request.form()`, you can limit how much data that allowed to enter i
 If you sure / only need short amount of form data, eg. under 64KiB, you can do the following:
 
 ```python
-form_data = await request.form(limit=65536)
+form_data = await request.form(max_size=65536)
 ```
 
 Note that if the coming request body higher than the `limit`, it will raise `ValueError`.
-The default `limit` is 8MiB.
+The default `max_size` is 8MiB.
 
 By lowering its value will help mitigating DoS attacks.
