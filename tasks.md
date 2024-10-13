@@ -36,7 +36,7 @@ if __name__ == '__main__':
     app.run('0.0.0.0', 8000, debug=True)
 ```
 
-If you want to execute the synchronous tasks instead, you can look at the [awaiter module](https://pypi.org/project/awaiter/).
+If you want to execute the synchronous/blocking tasks instead, you can look at the [awaiter module](https://pypi.org/project/awaiter/).
 
 ## Contexts
 `server['context']` is a mutable object (think a `dict` with a dot notation, or a [SimpleNamespace](https://docs.python.org/3/library/types.html#types.SimpleNamespace)).
@@ -46,7 +46,7 @@ It can be used to share state or data e.g. between [middleware](middleware.html)
 ```python
 ctx = server['context']
 # or
-# ctx = server['request'].context
+# ctx = server['request'].ctx
 
 ctx.anykey = 'mydata'
 ```
