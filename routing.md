@@ -31,7 +31,7 @@ async def my_page(**server):
     # Tremolo often uses bytes-like objects as is,
     # rather than converting to str or int.
     # so do not assume page_id is an int.
-    # yield b'You are on page ' + page_id
+    yield b'You are on page ' + page_id
 ```
 
 The regex syntax above uses *named groups* which you can learn more about at [https://docs.python.org/3/library/re.html#re.Match.groupdict](https://docs.python.org/3/library/re.html#re.Match.groupdict)
