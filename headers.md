@@ -22,7 +22,7 @@ You can get the `Cookie` value with:
 
 ```python
 print(
-    server['request'].headers.get(b'cookie')
+    request.headers.get(b'cookie')
 )
 ```
 
@@ -49,7 +49,7 @@ There is a better way to get cookies with:
 
 ```python
 print(
-    server['request'].cookies.get('a')
+    request.cookies.get('a')
 )
 ```
 
@@ -65,13 +65,13 @@ First, using the `set_header` of the [Response Object](https://nggit.github.io/t
 
 ```python
 
-server['response'].set_header('Set-Cookie', 'a=xyz')
+response.set_header('Set-Cookie', 'a=xyz')
 ```
 
 And the proper way is by using the `set_cookie`. It provides a convenient parameter for easily set cookie expiration, etc.
 
 ```python
-server['response'].set_cookie('a', 'xyz', expires=3600)
+response.set_cookie('a', 'xyz', expires=3600)
 ```
 
 ## Get the values of multiple fields as a list
