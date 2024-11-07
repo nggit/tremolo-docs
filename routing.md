@@ -4,9 +4,7 @@ nav_order: 3
 title: Routing
 ---
 
-Tremolo has no difficult abstractions, and never will. You don't need to learn a lot of trivial things. All you need to learn is Python.
-
-Tremolo uses only basic routing and built-in [re](https://docs.python.org/3/library/re.html) module.
+Tremolo uses only basic routing and built-in [re](https://docs.python.org/3/library/re.html) module. There are no difficult abstractions, and never will.
 
 ## Basic
 The following will handle
@@ -28,19 +26,17 @@ The following will match for example with http://example.com/page/12, http://exa
 @app.route(r'^/page/(?P<page_id>\d+)')
 async def my_page(**server):
     request = server['request']
-    page_id = request.params['path'].get('page_id', b'1')
+    page_id = request.params.path.get('page_id', b'1')
 
-    """
-    Tremolo often uses bytes-like objects as is,
-    rather than converting to str or int.
-    so do not assume page_id is an int.
-    """
-    yield b'You are on page ' + page_id
+    # Tremolo often uses bytes-like objects as is,
+    # rather than converting to str or int.
+    # so do not assume page_id is an int.
+    # yield b'You are on page ' + page_id
 ```
 
 The regex syntax above uses *named groups* which you can learn more about at [https://docs.python.org/3/library/re.html#re.Match.groupdict](https://docs.python.org/3/library/re.html#re.Match.groupdict)
 
-You can always check what kind of data is received if using regex in `request.params['path']`. It's a dict object.
+You can always check what kind of data is received if using regex in `request.params.path`. It's a dict object.
 
 It is worth noting that the routing has a limitation, which is that you cannot capture the beginning of the path.
 So it requires a prefix like `/page/` because Tremolo makes use of prefixes for caching.
