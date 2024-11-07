@@ -3,7 +3,7 @@ layout: page
 title: Middleware
 ---
 
-Middleware is like MITM. It can *intercept* **requests** before they are processed by handlers, and **responses** before they are sent to the client/browser.
+Middleware is a layer that can *intercept* **requests** before they are processed by handlers, and **responses** before they are sent to the client/browser.
 
 Tremolo has two kinds of middleware that can be created. Which are `on_request` and `on_response`.
 
@@ -48,12 +48,10 @@ async def my_request_middleware(**server):
         response.set_status(405, 'Method Not Allowed')
         response.set_content_type('text/plain')
 
-        """Halt with return.
-
-        The request will end at this point.
-        The next middlewares (if any), and handlers
-        will not be executed.
-        """
+        # Halt with return.
+        # The request will end at this point.
+        # The next middlewares (if any), and handlers
+        # will not be executed.
         return b'Request method %s is not supported!' % request.method
 
 @app.route('/hello')
