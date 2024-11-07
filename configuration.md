@@ -139,7 +139,7 @@ async def my_handler(**server):
     return 'OK'
 ```
 
-Note that the WebSocket/upgraded connection will not be affected. And will not work outside the async context (blocking calls).
+Note that the WebSocket/upgraded connection will not be affected. And won't work if you are running a blocking function, such as `time.sleep()` inside it.
 
 ### server_name
 Set the `Server` field in the response header.
