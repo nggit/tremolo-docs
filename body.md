@@ -15,13 +15,13 @@ Tremolo also supports RAW Body and HTTP chunked upload out of the box.
 If the `POST` data is `application/x-www-form-urlencoded`, it can be retrieved with:
 
 ```python
-form_data = await server['request'].form()
+form_data = await request.form()
 ```
 
 After that being called (at least once), then the form data will also available at:
 
 ```python
-server['request'].params['post']
+request.params.post
 ```
 
 The request body will also be **cached**, allowing `request.body()` to be *awaited* afterwards.
@@ -188,8 +188,8 @@ Now you should be able to upload files for up to 100MiB in size.
 `read(size)` is an *awaitable* that can be used to consume the request body instead of using `request.stream()` or `request.body()`.
 
 ```python
-data = await server['request'].read(100)
-next_data = await server['request'].read(50)
+data = await request.read(100)
+next_data = await request.read(50)
 ```
 
 It will read **exactly** 150 bytes of the request body. When no more body can be read, an empty `bytearray()` will be returned.
