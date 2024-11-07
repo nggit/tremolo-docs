@@ -5,7 +5,7 @@ title: Inter-process Synchronization
 
 When Tremolo HTTP server is configured with [worker_num](configuration.html#worker_num) > 1, it can be dangerous e.g. when you have code that writes to the same file.
 
-`server['lock']` can be used to mitigate this potential problem.
+`server['lock']` can be used to tackle this problem.
 
 It can synchronize all tasks across multiple workers/processes. In single process mode, it will only be like [asyncio.Lock](https://docs.python.org/3/library/asyncio-sync.html#asyncio.Lock), but thread-safe.
 
