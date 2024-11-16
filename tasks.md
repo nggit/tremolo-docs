@@ -10,9 +10,9 @@ Consider the following example:
 ```python
 import asyncio
 
-from tremolo import Tremolo
+from tremolo import Application
 
-app = Tremolo()
+app = Application()
 
 async def my_coro(fut):
     await asyncio.sleep(10)
@@ -39,14 +39,17 @@ if __name__ == '__main__':
 If you want to execute the synchronous/blocking tasks instead, you can look at the [awaiter module](https://pypi.org/project/awaiter/).
 
 ## Contexts
-`server['context']` is a mutable object (think a `dict` with a dot notation, or a [SimpleNamespace](https://docs.python.org/3/library/types.html#types.SimpleNamespace)).
+A *Context* is a mutable object (think a `dict` with a dot notation, or a [SimpleNamespace](https://docs.python.org/3/library/types.html#types.SimpleNamespace)).
 
-It can be used to share state or data e.g. between [middleware](middleware.html) and [handler](handlers.html), in a lifetime of a request.
+There are three kinds of context, which are `WorkerContext`, `ConnectionContext` and `RequestContext`.
+
+### RequestContext
+`request.context` can be used to share state or data e.g. between [middleware](middleware.html) and [handler](handlers.html), in a lifetime of a request.
 
 ```python
-ctx = server['context']
+ctx = request.context
 # or
-# ctx = server['request'].ctx
+# ctx = request.ctx
 
 ctx.anykey = 'mydata'
 ```
