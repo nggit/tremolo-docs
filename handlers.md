@@ -17,7 +17,7 @@ or alternative version:
 
 ```python
 @app.route('/hello')
-async def hello_world(response=None, **server):
+async def hello_world(request, response, **server):
     await response.write(b'Hello')
     await response.write(b'World!')
     await response.write(b'')
