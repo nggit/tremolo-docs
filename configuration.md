@@ -141,6 +141,12 @@ async def my_handler(**server):
 
 Note that the WebSocket/upgraded connection will not be affected. And won't work if you are running a blocking function, such as `time.sleep()` inside it.
 
+### shutdown_timeout
+Maximum number of seconds to wait after `SIGTERM` is sent to a worker process. During this time it can still accept new connections.
+For a quick shutdown you can set this to `0`.
+
+Defaults to `30` (seconds).
+
 ### server_name
 Set the `Server` field in the response header.
 
