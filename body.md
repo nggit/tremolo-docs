@@ -83,7 +83,7 @@ async def upload(**server):
 ```
 You can try uploading 3 files:
 ```
-curl -X POST -H "Content-Type: multipart/form-data; boundary=myboundary" -F "mytext=dataxxxx" -F "myfile=@file.txt" -F "myfile2=@image.jpg" http://localhost:8000/upload
+curl -X POST -H "Content-Type: multipart/form-data" -F "mytext=dataxxxx" -F "myfile=@file.txt" -F "myfile2=@image.jpg" http://localhost:8000/upload
 ```
 
 Then the above snippet will print something like:
