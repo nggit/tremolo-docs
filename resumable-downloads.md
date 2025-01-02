@@ -17,11 +17,11 @@ Usage:
 # http://localhost:8000/download/myvideo.mp4
 
 @app.route('/download/myvideo.mp4')
-async def download(**server):
+async def download(response):
     # video file location
-    path = '/home/Videos/myvideo.mp4'
+    path = '/home/user/Videos/myvideo.mp4'
 
-    await server['response'].sendfile(path, content_type='video/mp4')
+    await response.sendfile(path, content_type='video/mp4')
 
     # optional, to enable keep-alive
     return True

@@ -9,7 +9,7 @@ Just like the [WebSocket way](websocket.html), you only need to put the `sse=Non
 
 ```python
 @app.route('/sse')
-async def sse_handler(sse=None, **server):
+async def sse_handler(sse=None):
     if sse is None:
         # for some reason, the sse object was not created
         # due to an invalid request
@@ -38,7 +38,7 @@ Here's a simple example, but not necessarily a good way to do it.
 
 ```python
 @app.route('/sse')
-async def sse_handler(sse=None, **server):
+async def sse_handler(sse=None):
     if sse is None:
         # for some reason, the sse object was not created
         # due to an invalid request

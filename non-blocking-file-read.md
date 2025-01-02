@@ -7,8 +7,9 @@ Using an innocent way like this:
 
 ```python
 @app.route('/my/url/big.data')
-async def my_big_data(content_type='application/octet-stream', **server):
-    buffer_size = server['context'].options['buffer_size']
+async def my_big_data(request, response):
+    buffer_size = request.ctx.options['buffer_size']
+    response.set_content_type('application/octet-stream')
 
     with open('/my/folder/big.data', 'rb') as f:
         chunk = True

@@ -17,7 +17,7 @@ or alternative version:
 
 ```python
 @app.route('/hello')
-async def hello_world(request, response, **server):
+async def hello_world(request, response):
     await response.write(b'Hello')
     await response.write(b'World!')
     await response.write(b'')
@@ -27,15 +27,15 @@ async def hello_world(request, response, **server):
 ```
 
 
-Each handler is required to accept a *keyword arguments* in this case `**server`. Although the name does not have to be `server`, for example `**kwargs`.
+Each handler is required to accept a *keyword arguments* in this case `**server`. Or on an individual basis like `request`, `response`, etc. (number and order have no effect).
 
 `server` is a dict object, which contains other objects that are often needed, such as `server['request']` which is an [HTTPRequest](https://nggit.github.io/tremolo-docs/request.html) object, and `server['response']` which is an [HTTPResponse](https://nggit.github.io/tremolo-docs/response.html) object.
 
-Before the `**server`, you can provide some options to fine tune the handler such as `chunked`, `rate`, `buffer_size`, etc.
+You can provide some options to fine tune the handler such as `chunked`, `rate`, `buffer_size`, etc.
 
 ```python
 @app.route('/hello')
-async def hello_world(chunked=False, rate=2097152, buffer_size=32768, **server):
+async def hello_world(request, chunked=False, rate=2097152, buffer_size=32768):
     yield b'Hello'
     yield b'World!'
 ```
@@ -44,12 +44,12 @@ async def hello_world(chunked=False, rate=2097152, buffer_size=32768, **server):
 * *rate* 2MiB/s is the download speed limit for each client. This is useful for limiting bandwidth usage as well as mitigating bandwidth hogs.
 * *buffer_size* Tremolo will always process data every chunk based on this size.
 
-In addition to the options above, you can define arbitrary options, and they will magically become available in `server['context'].options`.
+In addition to the options above, you can define arbitrary options, and they will magically become available in `request.ctx.options`.
 
 ```python
 @app.route('/hello')
-async def hello_world(a=1, rate=2097152, buffer_size=32768, **server):
-    print(server['context'].options)
+async def hello_world(request, a=1, rate=2097152, buffer_size=32768):
+    print(request.ctx.options)
 
     yield b'Hello'
     yield b'World!'
@@ -92,4 +92,3 @@ handler hello_world has exited with the connection possibly left open
 ```
 Be careful that the connection may hang forever, and not be subject to keep-alive termination.
 In other words, the client can abuse by not closing the connection.
-

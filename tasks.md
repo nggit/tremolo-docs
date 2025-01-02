@@ -5,6 +5,8 @@ title: Tasks and Contexts
 
 You can create asynchronous tasks using the [loop.create_task()](https://docs.python.org/3/library/asyncio-eventloop.html#asyncio.loop.create_task) directly or `request.protocol.create_task()`. The difference is that the latter is tracked by the server and will be canceled when the client disconnects.
 
+To run tasks that keep running in the background even if the client connection is lost use `request.protocol.create_background_task()`. The reference of these tasks will be in `server['globals'].tasks`.
+
 Consider the following example:
 
 ```python
@@ -19,10 +21,7 @@ async def my_coro(fut):
     fut.set_result(b'Promised result after sleep 10s')
 
 @app.route('/hello')
-async def hello_world(**server):
-    request = server['request']
-    loop = server['loop']
-
+async def hello_world(request, loop):
     fut = loop.create_future()
     request.protocol.create_task(my_coro(fut))
 
@@ -31,6 +30,7 @@ async def hello_world(**server):
     await fut # wait promise done
 
     yield fut.result()
+
 
 if __name__ == '__main__':
     app.run('0.0.0.0', 8000, debug=True)
@@ -56,3 +56,6 @@ ctx.anykey = 'mydata'
 
 Note that the following attributes are reserved:
 `options`, and `tasks`.
+
+### WorkerContext
+`server['globals']` is a worker-level context. Which means it can be accessed from anywhere.

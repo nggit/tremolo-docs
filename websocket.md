@@ -9,7 +9,7 @@ To enable WebSocket support for a [handler](handlers.html), use the `websocket=N
 
 ```python
 @app.route('/ws')
-async def ws_handler(websocket=None, **server):
+async def ws_handler(websocket=None):
     if websocket is None:
         # show a not found page
         raise NotFound

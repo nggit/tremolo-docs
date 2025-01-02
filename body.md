@@ -74,8 +74,8 @@ You can *stream* multipart through the `request.files()` *async generator*. Each
 
 ```python
 @app.route('/upload')
-async def upload(**server):
-    async for part in server['request'].files():
+async def upload(request):
+    async for part in request.files():
         part['data'] = part['data'][:12]
         print(part)
 
@@ -138,10 +138,10 @@ Here's a code example to receive a binary data upload, then save it.
 
 ```python
 @app.route('/upload')
-async def upload(**server):
+async def upload(request):
     with open('/save/to/image_uploaded.png', 'wb') as f:
         # read body chunk by chunk
-        async for data in server['request'].stream():
+        async for data in request.stream():
 
             # write to file on each chunk
             f.write(data)
@@ -153,10 +153,10 @@ or
 
 ```python
 @app.route('/upload')
-async def upload(**server):
+async def upload(request):
     with open('/path/to/image_uploaded.png', 'wb') as f:
         # read body at once
-        data = await server['request'].body()
+        data = await request.body()
 
         # write to file
         f.write(data)

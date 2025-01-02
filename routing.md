@@ -24,8 +24,7 @@ The following will match for example with http://example.com/page/12, http://exa
 
 ```python
 @app.route(r'^/page/(?P<page_id>\d+)')
-async def my_page(**server):
-    request = server['request']
+async def my_page(request):
     page_id = request.params.path.get('page_id', b'1')
 
     # Tremolo often uses bytes-like objects as is,

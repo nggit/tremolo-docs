@@ -39,7 +39,7 @@ async def update(**server):
 ## Multiple Shared Resources
 In case you have multiple shared resources/different files, using a single lock as above can block other concurrent tasks - **even** if they are going to modify different files. It makes sense to have more than one lock provided for each resource for maximum concurrency.
 
-Tremolo by default has **16** usable locks, `0 - 15` or `0x0 - 0xf`.
+Tremolo by default has **16** usable locks, `0 - 15`.
 
 ```python
 # in current task

@@ -15,9 +15,7 @@ It will be faster than using `return` because it skips some logic. But only `byt
 
 ```python
 @app.route('/hello-x')
-async def hello_world_x(**server):
-    response = server['response']
-
+async def hello_world_x(response):
     await response.end(b'Hello world!')
 ```
 
@@ -44,7 +42,7 @@ async def hello_world(**server):
 
 ```python
 @app.route('/hello')
-async def hello_world(stream=False, **server):
+async def hello_world(request, stream=False):
     for b in b'Hello, World!':
         # put a delay on each character
         await asyncio.sleep(0.2)
@@ -61,9 +59,7 @@ It's a lower-level method, which only supports `bytes-like` objects.
 
 ```python
 @app.route('/hello-r')
-async def hello_world_r(**server):
-    response = server['response']
-
+async def hello_world_r(response):
     await response.send(b'HTTP/1.1 200 OK\r\nConnection: close\r\n\r\n')
     await response.send(b'Hello World!')
 ```

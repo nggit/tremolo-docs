@@ -21,6 +21,7 @@ async def hello_world(**server):
     logger.info('Current page: /hello')
     return 'Hello world!', 'latin-1'
 
+
 if __name__ == '__main__':
     app.run('0.0.0.0', 8000, debug=True)
 ```

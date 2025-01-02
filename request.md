@@ -10,9 +10,7 @@ Here are some of interesting objects in addition to those in [Headers and Cookie
 
 ```python
 @app.route('/hello')
-async def hello_world(**server):
-    request = server['request']
-
+async def hello_world(request):
     print('REMOTE_ADDR:',    request.ip)
     print('HTTP_HOST:',      request.host)
     print('REQUEST_METHOD:', request.method)
