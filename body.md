@@ -192,7 +192,7 @@ data = await request.read(100)
 next_data = await request.read(50)
 ```
 
-It will read **exactly** 150 bytes of the request body. When no more body can be read, an empty `bytearray()` will be returned.
+It will read **exactly** 150 bytes of the request body. When no more body can be read, an `b''` (empty `bytes`) will be returned.
 
 If you pass `size=-1`, it literally means `next(stream())`, or it will read up to the maximum [buffer_size](https://nggit.github.io/tremolo-docs/configuration.html#buffer_size), typically **<= 16KiB**. To read the entire body use `await request.body()`.
 
