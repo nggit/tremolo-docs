@@ -142,7 +142,7 @@ async def my_handler(**server):
 Note that the WebSocket/upgraded connection will not be affected. And won't work if you are running a blocking function, such as `time.sleep()` inside it.
 
 ### app_close_timeout
-This is the same timeout handler as *app_handler_timeout*, but it is initiated when the client connection is lost and the handler is still running for some reason. The default is `30`.
+This is another handler timeout similar to *app_handler_timeout*, but it is initiated when the client connection is lost and the handler is still running for some reason. The default is `30`.
 
 It is possible that it is initiated while *app_handler_timeout* is still waiting. And the lowest timeout takes precedence.
 
