@@ -5,7 +5,7 @@ title: Tasks and Contexts
 
 You can create asynchronous tasks using the [loop.create_task()](https://docs.python.org/3/library/asyncio-eventloop.html#asyncio.loop.create_task) directly or `request.protocol.create_task()`. The difference is that the latter is tracked by the server and will be canceled when the client disconnects.
 
-To run tasks that keep running in the background even if the client connection is lost use `request.protocol.create_background_task()`. The reference of these tasks will be in `server['globals'].tasks`.
+To run tasks that keep running in the background even if the client connection is lost use `server['app'].create_task()`. The reference of these tasks will be in `server['globals'].tasks`.
 
 Consider the following example:
 
@@ -58,4 +58,9 @@ Note that the following attributes are reserved:
 `options`, and `tasks`.
 
 ### WorkerContext
-`server['globals']` is a worker-level context. Which means it can be accessed from anywhere.
+`server['globals']` is a worker-level context. Which means it can be accessed from anywhere, anytime.
+
+### ConnectionContext
+`server['context']` is a connection-level context that is alive from the start of the connection until the client disconnects. Rarely used.
+
+It has the same effect as `request.context` in non-Keep-Alive situations, i.e. **1 connection 1 request** rather than **1 connection with multiple requests**.
