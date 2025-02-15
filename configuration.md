@@ -62,6 +62,9 @@ The default is `2 * 1048576`, or **2MiB**.
 ### log_level
 The default is `'DEBUG'` (string). For more info, please check [https://docs.python.org/3/library/logging.html#levels](https://docs.python.org/3/library/logging.html#levels).
 
+### log_fmt
+Python's log format. If empty defaults to `'%(message)s'`.
+
 ### loop
 A fully qualified event loop name. E.g. `'asyncio'` or `'asyncio.SelectorEventLoop'`.
 It expects the respective module to already be present.
