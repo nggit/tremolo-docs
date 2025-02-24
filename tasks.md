@@ -43,7 +43,7 @@ A *Context* is a mutable object (think a `dict` with a dot notation, or a [Simpl
 
 There are three kinds of context, which are `WorkerContext`, `ConnectionContext` and `RequestContext`.
 
-### RequestContext
+### 1. RequestContext
 `request.context` can be used to share state or data e.g. between [middleware](middleware.html) and [handler](handlers.html), in a lifetime of a request.
 
 ```python
@@ -57,10 +57,34 @@ ctx.anykey = 'mydata'
 Note that the following attributes are reserved:
 `options`, and `tasks`.
 
-### WorkerContext
+### 2. WorkerContext
 `server['globals']` is a worker-level context. Which means it can be accessed from anywhere, anytime.
 
-### ConnectionContext
+### 3. ConnectionContext
 `server['context']` is a connection-level context that is alive from the start of the connection until the client disconnects. Rarely used.
 
-It has the same effect as `request.context` in non-Keep-Alive situations, i.e. **1 connection 1 request** rather than **1 connection with multiple requests**.
+## Contexts lifetime
+```
+|-W1- server['globals'] (WorkerContext) ----------------------------W2->|
+
+|-C1- server['context'] -C2->|- server['context'] (ConnectionContext) ->|
+
+|-R1--- request.ctx ----R2-> |--- request.ctx --->|--- request.ctx ---->|
+
+
+Hooks:
+
+W1: @app.on_worker_start
+W2: @app.on_worker_stop
+
+C1: @app.on_connect (TCP connection)
+C2: @app.on_close
+
+R1: @app.on_request (HTTP transaction)
+R2: @app.on_response
+```
+
+A single TCP connection can hold multiple consecutive transactions/requests (Keep-Alive).
+In non-Keep-Alive, `server['context']` has the same lifetime as `request.ctx`.
+
+Anyway, `request.ctx` is generally all you need.
