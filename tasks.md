@@ -84,7 +84,7 @@ R1: @app.on_request (HTTP transaction)
 R2: @app.on_response
 ```
 
-A single TCP connection can hold multiple consecutive transactions/requests (Keep-Alive).
+A single TCP connection can hold multiple consecutive HTTP transactions/requests (Keep-Alive).
 In non-Keep-Alive, `server['context']` has the same lifetime as `request.ctx`.
 
 Anyway, `request.ctx` is generally all you need.
