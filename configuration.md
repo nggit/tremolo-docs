@@ -127,6 +127,8 @@ Maximum number of keep-alive connections.
 
 The defaults is `512` (connections/worker). The oldest, or **513th** will be kicked out.
 
+This value often gives false impressions on benchmarks. A good benchmark uses concurrency between 1 - 500. If you want to use concurrency above 1000, you must increase this value, *ulimit*, and possibly [worker_num](#worker_num). Otherwise you will see a lot of connections being dropped.
+
 ### app_handler_timeout
 The common term for this is "maximum execution time". The default is `120` seconds.
 
