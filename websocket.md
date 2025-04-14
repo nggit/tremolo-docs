@@ -43,15 +43,20 @@ To close the connection gracefully, you can for example use `websocket.close(cod
     from tremolo.exceptions import WebSocketClientClosed
 
     # ...
+    await websocket.accept()
 
     try:
-        async for message in websocket:
+        while True:
+            message = await websocket.receive()
+            # send back the received message
             await websocket.send(f'You said: {message}')
     except WebSocketClientClosed as exc:
         print(f'the client has closed the connection with code {exc.code}')
         # close the connection accordingly
         await websocket.close()
 ```
+
+Or just use *async for* without *try - except*, with the difference that you can't customize the closing code.
 
 If you think the built-in WebSocket support does not fulfill the features you expect, or want to use an external WebSocket server, you can disable it with `ws=False` in the framework [configuration](configuration.html#ws).
 
