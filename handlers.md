@@ -56,6 +56,7 @@ async def hello_world(request, a=1, rate=2097152, buffer_size=32768):
 ```
 
 ## Server behavior regarding the return value of the handler
+Unlike most frameworks, Tremolo favors the use of built-in data types in return values, rather than an opinionated *HTTPResponse*.
 
 ### 1. return b''
 ```python
