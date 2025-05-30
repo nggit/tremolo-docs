@@ -6,7 +6,7 @@ grand_parent: Reference
 nav_order: 3
 ---
 
-To append a custom header to the [response.headers](/reference/response/headers.html).
+To append a custom header to the [response.headers](/tremolo-docs/reference/response/headers.html).
 
 Example:
 ```python

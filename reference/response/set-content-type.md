@@ -6,7 +6,7 @@ grand_parent: Reference
 nav_order: 7
 ---
 
-To set a `Content-Type` header to the [response.headers](/reference/response/headers.html).
+To set a `Content-Type` header to the [response.headers](/tremolo-docs/reference/response/headers.html).
 
 Example:
 ```python

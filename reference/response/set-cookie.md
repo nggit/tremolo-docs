@@ -6,7 +6,7 @@ grand_parent: Reference
 nav_order: 5
 ---
 
-To set a `Set-Cookie` header to the [response.headers](/reference/response/headers.html).
+To set a `Set-Cookie` header to the [response.headers](/tremolo-docs/reference/response/headers.html).
 
 Signature:
 ```python

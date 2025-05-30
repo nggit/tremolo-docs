@@ -2,13 +2,13 @@
 layout: default
 title: Server-Sent Events
 parent: Reference
-has_children: true
-has_toc: true
+has_children: false
+has_toc: false
 ---
 
 Tremolo provides a [Server-Sent Events (SSE)](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events) helper to send continuous data over HTTP.
 
-Just like the [WebSocket way](/reference/websocket.html), you only need to put the `sse=None` placeholder in the [handlers](/handlers.html) to be able to send SSE data.
+Just like the [WebSocket way](/tremolo-docs/reference/websocket.html), you only need to put the `sse=None` placeholder in the [handlers](/tremolo-docs/handlers.html) to be able to send SSE data.
 
 ```python
 @app.route('/sse')

@@ -17,7 +17,7 @@ set_header(name, value='')
 set_status(status=200, message=b'OK')
 ```
 
-You can use the `write()` or `end()` method instead of [yield / return](/yield.html) to send the HTTP response body. Although the latter is preferred.
+You can use the `write()` or `end()` method instead of [yield / return](/tremolo-docs/yield.html) to send the HTTP response body. Although the latter is preferred.
 
 You can imagine that `write()` is like `yield`, it can be called more than once.
 Whereas `end()` is like `return`, which is only allowed to be called once.
@@ -43,4 +43,4 @@ Here's a summary of the comparison:
 | response.close(keepalive=True)       | No                   | Mark the end of response. Connection will be closed, but respect HTTP keep-alive    |
 | response.close()                     | No                   | Just close the connection. Called automatically in handlers when `None` is returned |
 
-See also: [response.sendfile()](/resumable-downloads.html)
+See also: [response.sendfile()](/tremolo-docs/resumable-downloads.html)

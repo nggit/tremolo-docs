@@ -6,7 +6,7 @@ grand_parent: Reference
 nav_order: 4
 ---
 
-To set a custom header to the [response.headers](/reference/response/headers.html).
+To set a custom header to the [response.headers](/tremolo-docs/reference/response/headers.html).
 This will overwrite the existing header (if any).
 
 Example:

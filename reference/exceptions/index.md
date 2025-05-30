@@ -2,11 +2,11 @@
 layout: default
 title: HTTP Exceptions
 parent: Reference
-has_children: true
-has_toc: true
+has_children: false
+has_toc: false
 ---
 
-You can raise an [HTTPException](https://github.com/nggit/tremolo/blob/main/tremolo/exceptions.py) inside [handlers](/handlers.html) or [middlewares](/middleware.html).
+You can raise an [HTTPException](https://github.com/nggit/tremolo/blob/main/tremolo/exceptions.py) inside [handlers](/tremolo-docs/handlers.html) or [middlewares](/tremolo-docs/middleware.html).
 
 Consider the following code:
 
