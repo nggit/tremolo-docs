@@ -1,11 +1,14 @@
 ---
-layout: page
-title: WebSocket
+layout: default
+title: WebSocket object
+parent: Reference
+has_children: true
+has_toc: true
 ---
 
 Tremolo has a built-in, minimal implementation of [WebSocket](https://en.wikipedia.org/wiki/WebSocket).
 
-To enable WebSocket support for a [handler](handlers.html), use the `websocket=None` placeholder as follows:
+To enable WebSocket support for a [handler](/handlers.html), use the `websocket=None` placeholder as follows:
 
 ```python
 @app.route('/ws')
@@ -58,6 +61,6 @@ To close the connection gracefully, you can for example use `websocket.close(cod
 
 Or just use *async for* without *try - except*, with the difference that you can't customize the closing code.
 
-If you think the built-in WebSocket support does not fulfill the features you expect, or want to use an external WebSocket server, you can disable it with `ws=False` in the framework [configuration](configuration.html#ws).
+If you think the built-in WebSocket support does not fulfill the features you expect, or want to use an external WebSocket server, you can disable it with `ws=False` in the framework [configuration](/configuration.html#ws).
 
 Or `--no-ws` in the ASGI server configuration.

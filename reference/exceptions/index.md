@@ -1,9 +1,12 @@
 ---
-layout: page
+layout: default
 title: HTTP Exceptions
+parent: Reference
+has_children: true
+has_toc: true
 ---
 
-You can raise an [HTTPException](https://github.com/nggit/tremolo/blob/master/tremolo/exceptions.py) inside [handlers](handlers.html) or [middlewares](middleware.html).
+You can raise an [HTTPException](https://github.com/nggit/tremolo/blob/main/tremolo/exceptions.py) inside [handlers](/handlers.html) or [middlewares](/middleware.html).
 
 Consider the following code:
 
@@ -12,6 +15,7 @@ from tremolo import Tremolo
 from tremolo.exceptions import ServiceUnavailable
 
 app = Tremolo()
+
 
 @app.route('/hello')
 async def hello_world(**server):
@@ -64,6 +68,8 @@ You can also create your custom `HTTPException`:
 
 ```python
 from tremolo.exceptions import HTTPException
+
+# ...
 
 raise HTTPException(
     'Site down for maintenance',
