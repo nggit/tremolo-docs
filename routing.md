@@ -48,7 +48,7 @@ async def my_page(request, page_id=b'1', **server):
 ```
 
 {: .note }
-*regex*-based routing will take input from `request.url`, meaning the match includes query string, not just path.
+*regex*-based routing pattern will be compared against `request.url` not `request.path`, meaning the match involves also query string.
 
 ## Custom 404 page
 ```python
