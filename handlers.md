@@ -93,3 +93,22 @@ handler hello_world has exited with the connection possibly left open
 ```
 Be careful that the connection may hang forever, and not be subject to keep-alive termination.
 In other words, the client can abuse by not closing the connection.
+
+## Handler cancellation
+Tremolo will automatically kill handlers that exceed the [app_handler_timeout](/tremolo-docs/configuration.html#app_handler_timeout) or [app_close_timeout](/tremolo-docs/configuration.html#app_close_timeout) limit.
+
+You can wrap your code using `try - finally` if you want to do some cleanup.
+```python
+@app.route('/')
+async def my_handler(**server):
+    try:
+        await asyncio.sleep(123)
+    finally:
+        # do clean up
+
+    # not reached
+    return 'OK'
+
+```
+
+Make sure you allow enough time for uploading cases. On downloads with [response.sendfile()](/tremolo-docs/resumable-downloads.html), there is no need to worry as browsers can generally re-request `Range`s that are still needed.
