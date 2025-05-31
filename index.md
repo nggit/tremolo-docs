@@ -4,7 +4,9 @@ nav_order: 1
 title: Introduction
 ---
 
-# Tremolo
+![Tremolo](https://raw.githubusercontent.com/nggit/tremolo/main/media/tremolo.png)
+---
+
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=nggit_tremolo&metric=coverage)](https://sonarcloud.io/summary/new_code?id=nggit_tremolo)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=nggit_tremolo&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=nggit_tremolo)
 
@@ -45,15 +47,19 @@ Tremolo is only suitable for those who value [minimalism](https://en.wikipedia.o
 
 With only **3k** lines of code, with **no dependencies** other than the [Python Standard Library](https://docs.python.org/3/library/index.html), it gives you:
 
-* HTTP/1.x with [WebSocket support](https://nggit.github.io/tremolo-docs/websocket.html)
+* A production-ready HTTP/1.x server rather than just a development server,
+* of course with [WebSocket support](https://nggit.github.io/tremolo-docs/reference/websocket/)
 * Keep-Alive connections with [configurable limit](https://nggit.github.io/tremolo-docs/configuration.html#keepalive_connections)
 * Stream chunked uploads
 * [Stream multipart uploads](https://nggit.github.io/tremolo-docs/body.html#multipart)
 * Download/upload speed throttling
 * [Resumable downloads](https://nggit.github.io/tremolo-docs/resumable-downloads.html)
 * Framework features; routing, middleware, etc.
-* ASGI server
+* ASGI server implementation
 * PyPy compatible
+
+All built-in in a single, portable folder module [tremolo](https://github.com/nggit/tremolo/tree/main/tremolo),
+in a very compact way like a Swiss Army knife.
 
 ## Installation
 ```
@@ -103,7 +109,7 @@ async def app(scope, receive, send):
     })
     await send({
         'type': 'http.response.body',
-        'body': b'Hello world!'
+        'body': b'Hello, World!'
     })
 ```
 
@@ -123,6 +129,36 @@ It's also possible to run the ASGI server programmatically ([example with uvloop
 
 ```
 python3 example_uvloop.py
+```
+
+## Experimental Features
+Experimental features can be enabled with `experimental=True` or `--experimental`.
+Since they require user awareness, they are not enabled by default.
+
+For example, even in ASGI server mode, Tremolo gives apps direct access to the server objects.
+Which means that even if you use an app/framework like Starlette/FastAPI,
+you can still use Tremolo's `request` and `response` objects for more optimized [streaming features](https://nggit.github.io/tremolo-docs/body.html#multipart).
+```python
+from starlette.applications import Starlette
+from starlette.routing import Route
+
+
+async def homepage(request):
+    # Tremolo's `request` and `response` objects
+    req = request.state.server['request']
+    res = request.state.server['response']
+
+    async for data in req.stream():
+        await res.write(data)
+
+    await res.end()
+
+
+routes = [
+    Route('/', homepage, methods=['GET', 'POST']),
+]
+
+app = Starlette(routes=routes)
 ```
 
 ## Testing
