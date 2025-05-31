@@ -97,7 +97,9 @@ In other words, the client can abuse by not closing the connection.
 ## Handler cancellation
 Tremolo will automatically kill handlers that exceed the [app_handler_timeout](/tremolo-docs/configuration.html#app_handler_timeout) or [app_close_timeout](/tremolo-docs/configuration.html#app_close_timeout) limit.
 
-You can wrap your code using `try - finally` if you want to do some cleanup.
+The handler will not be killed if you are working with an upgraded connection like [WebSocket](/tremolo-docs/reference/websocket/). The client will be connected virtually forever, [as long as the server is not full](https://github.com/nggit/tremolo/discussions/276).
+
+You can wrap your code using *try - finally* if you want to do some clean up.
 ```python
 @app.route('/')
 async def my_handler(**server):
