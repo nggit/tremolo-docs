@@ -16,13 +16,13 @@ E.g. `8000`, `8080`, etc.
 ### reuse_port
 The default is `True`.
 
-### locks
-The default is `16`. Please read [Inter-process Synchronization](inter-process-sync.html#multiple-shared-resources).
-
-Note that this setting is not available in ASGI server mode.
-
 ### worker_num
 The default is `1`.
+
+### thread_pool_size
+Number of executor threads per worker/process. Mainly used in [synchronous handlers](/tremolo-docs/handlers.html#synchronous-handlers) as well to assist [Inter-process Synchronization](/tremolo-docs/inter-process-sync.html#multiple-shared-resources).
+
+The default is `5`.
 
 ### limit_memory
 Restart the worker if this limit (in KiB) is reached (Linux-only).
