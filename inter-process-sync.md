@@ -28,8 +28,8 @@ Or the traditional way:
 async def update(**server):
     lock = server['lock']
 
+    await lock.acquire()
     try:
-        await lock.acquire()
         # lock acquired, modify the shared resource
         # other processes that are acquiring this lock should be waiting
     finally:
@@ -39,7 +39,7 @@ async def update(**server):
 ## Multiple Shared Resources
 In case you have multiple shared resources/different files, using a single lock as above can block other concurrent tasks - **even** if they are going to modify different files. It makes sense to have more than one lock provided for each resource for maximum concurrency.
 
-Tremolo by default has **16** usable locks, `0 - 15`.
+Tremolo by default has **5** usable locks, `0 - 4`.
 
 ```python
 # in current task
@@ -59,8 +59,8 @@ Tremolo by default has **16** usable locks, `0 - 15`.
 
 In the example above we found using two locks, `lock(0)` and `lock(1)`, for two different files.
 
-`lock(0)` is basically the same as `lock`, and if the given number exceeds the default range of `0 - 15`, for example **16**, it will be rotated using modulo internally. Meaning `lock(16)` will only be the same as `lock(0)` or `lock`.
+`lock(0)` is basically the same as `lock`, and if the given number exceeds the default range of `0 - 4`, for example **5**, it will be rotated using modulo internally. Meaning `lock(5)` will only be the same as `lock(0)` or `lock`.
 
-If more than 16 locks are required, they can be set with the [locks](configuration.html#locks) configuration.
+If more than 5 locks are required, they can be set with the [thread_pool_size](/tremolo-docs/configuration.html#thread_pool_size) configuration.
 
 This is a design decision; that locks cannot be added on-demand/dynamically. Otherwise the implementation will be more complex and likely to be [overhead](https://docs.python.org/3/library/multiprocessing.html#multiprocessing.Manager).
