@@ -120,7 +120,7 @@ The async paradigm may be painful for beginners or old school. Support for synch
 
 You can simply not use the `async` keyword in handler declarations. You can run blocking code inside without interrupting the main process as each handler will be executed on a separate thread. There are 5 executor threads available as default which you can configure with [thread_pool_size](/tremolo-docs/configuration.html#thread_pool_size).
 
-The sync handlers are suitable for long io such as loading static files, etc. For persistent connections such as WebSocket/SSE, async is still the optimal choice.
+The sync handlers are suitable for longer, blocking IO operations such as loading a template file in one go, etc. For persistent connections such as WebSocket/SSE, async is still the optimal choice. As it scales well because it requires fewer threads to handle more connections.
 
 ```python
 from threading import current_thread
