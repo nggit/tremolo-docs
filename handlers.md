@@ -114,3 +114,20 @@ async def my_handler(**server):
 ```
 
 Make sure you allow enough time for uploading cases. On downloads with [response.sendfile()](/tremolo-docs/resumable-downloads.html), there is no need to worry as browsers can generally re-request `Range`s that are still needed.
+
+## Synchronous handlers
+The async paradigm may be painful for beginners. Support for synchronous handlers was added in https://github.com/nggit/tremolo/pull/286 .
+
+You can simpy not use the `async` keyword in handler declarations. You can run blocking code inside without interrupting the main process as each handler will be executed on a separate thread. There are 5 executor threads available as default which you can configure with [thread_pool_size](/tremolo-docs/configuration.html#thread_pool_size).
+
+The sync handlers are suitable for long io such as loading static files, etc. For persistent connections such as WebSocket/SSE, async is still the optimal choice.
+
+```python
+from threading import current_thread
+
+
+@app.route('/')
+def sync_handler(request, **server):
+    return current_thread().name
+
+```
