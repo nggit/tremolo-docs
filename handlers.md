@@ -134,7 +134,7 @@ def sync_handler(request, **server):
 
 If you are using a sync handler then you obviously can't use `await`. And since Tremolo is an *async-first* framework, most functions should be awaited.
 
-Therefore in [#289](https://github.com/nggit/tremolo/pull/289) is implemented to work around this. Basically you don't need to use `await` and it still works. Cool!
+Therefore in [#289](https://github.com/nggit/tremolo/pull/289) `AsyncToSyncWrapper` is implemented to work around this. Basically you don't need to use `await` and it still works. Cool!
 
 ```python
 @app.route('/async')
@@ -156,4 +156,4 @@ def sync_handler(request, **server):
 
 But keep in mind, reading the request body in the sync handler will be limited to 5 concurrent connections only. Because 1 thread can only hold one request - response cycle at a time.
 
-This is not necessarily a bad thing, thread size limits can also naturally *backpressure* memory usage.
+This is not necessarily a bad thing, [thread size limits]((/tremolo-docs/configuration.html#thread_pool_size)) can also naturally *backpressure* memory usage.
