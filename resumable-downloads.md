@@ -26,3 +26,6 @@ async def download(response):
     # optional, to enable keep-alive
     return True
 ```
+
+The default `content_type` is `'application/octet-stream'`. You must manually specify it for the browser to render properly. Please refer to [https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/MIME_types/Common_types](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/MIME_types/Common_types)
+ .
