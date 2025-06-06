@@ -116,7 +116,7 @@ async def my_handler(**server):
 Make sure you allow enough time for uploading cases. On downloads with [response.sendfile()](/tremolo-docs/resumable-downloads.html), there is no need to worry as browsers can generally re-request `Range`s that are still needed.
 
 ## Synchronous handlers
-The async paradigm may be painful for beginners or old school. Support for synchronous handlers was added in https://github.com/nggit/tremolo/pull/286 .
+The async paradigm may be painful for beginners or old school. Support for synchronous handlers was added in [#286](https://github.com/nggit/tremolo/pull/286) .
 
 You can simply not use the `async` keyword in handler declarations. You can run blocking code inside without interrupting the main process as each handler will be executed on a separate thread. There are 5 executor threads available as default which you can configure with [thread_pool_size](/tremolo-docs/configuration.html#thread_pool_size).
 
@@ -131,3 +131,29 @@ def sync_handler(request, **server):
     return current_thread().name
 
 ```
+
+If you are using a sync handler then you obviously can't use `await`. And since Tremolo is an *async-first* framework, most functions should be awaited.
+
+Therefore in [#289](https://github.com/nggit/tremolo/pull/289) is implemented to work around this. Basically you don't need to use `await` and it still works. Cool!
+
+```python
+@app.route('/async')
+async def async_handler(request, **server):
+    print(request)  # <tremolo.lib.http_request.HTTPRequest object at 0x...>
+
+    data = await request.body()
+    return data
+
+
+@app.route('/sync')
+def sync_handler(request, **server):
+    print(request)  # <tremolo.utils.AsyncToSyncWrapper object at 0x...>
+
+    data = request.body()  # it works!
+    return data
+
+```
+
+But keep in mind, reading the request body in the sync handler will be limited to 5 concurrent connections only. Because 1 thread can only hold one request - response cycle at a time.
+
+This is not necessarily a bad thing, thread size limits can also naturally *backpressure* memory usage.
