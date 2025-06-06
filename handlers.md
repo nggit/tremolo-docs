@@ -157,3 +157,6 @@ def sync_handler(request, **server):
 But keep in mind, reading the request body in the sync handler will be limited to 5 concurrent connections only. Because 1 thread can only hold one request - response cycle at a time.
 
 This is not necessarily a bad thing, [thread size limits]((/tremolo-docs/configuration.html#thread_pool_size)) can also naturally *backpressure* memory usage.
+
+{: .warning }
+A caveat about sync handlers: [Handler cancellation](#handler-cancellation) like the previous topic will not work as expected. Even if the client is disconnected, tasks on the thread cannot be stopped as **there is no way to kill the thread from the outside**. You may encounter deadlocks **if you do not make sure your code terminates**. Although this case does not degrade the async part of the server.
