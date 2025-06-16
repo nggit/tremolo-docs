@@ -118,7 +118,7 @@ Make sure you allow enough time for uploading cases. On downloads with [response
 ## Synchronous handlers
 The async paradigm may be painful for beginners or old school. Support for synchronous handlers was added in [#286](https://github.com/nggit/tremolo/pull/286) .
 
-You can simply not use the `async` keyword in handler declarations. You can run blocking code inside without interrupting the main process as each handler will be executed on a separate thread. There are 5 executor threads available as default which you can configure with [thread_pool_size](/tremolo-docs/configuration.html#thread_pool_size).
+You can simply omit the `async` keyword in handler declarations. You can run blocking code inside without interrupting the main thread as each handler will be executed on a separate thread. There are 5 executor threads available as default which you can configure with [thread_pool_size](/tremolo-docs/configuration.html#thread_pool_size).
 
 The sync handlers are suitable for longer, blocking IO operations such as loading a template file in one go, etc. For persistent connections such as WebSocket/SSE, async is still the optimal choice. As it scales well because it requires fewer threads to handle more connections.
 
