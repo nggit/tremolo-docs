@@ -76,7 +76,7 @@ You can *stream* multipart through the `request.files()` *async generator*. Each
 @app.route('/upload')
 async def upload(request):
     async for part in request.files():
-        part['data'] = part['data'][:12]
+        part['data'] = part['data'][:12]  # truncated to make it print()ing-friendly
         print(part)
 
     return 'Done.'
@@ -128,6 +128,18 @@ This means that if you upload a 300MiB file, it will be represented 3 times, whi
     'data': b'EF',
     'eof': True
 }
+```
+
+Last but not least, instead of going around in a single iteration and paying attention to the `part['eof']` signals, in [#293](https://github.com/nggit/tremolo/pull/293) we introduced `part.stream()` which makes the usage simpler.
+
+```python
+# `part` represents a field/file received in a multipart request
+async for part in request.files(max_file_size=16384):
+    filename = part['filename']
+    # ...
+    # stream a (possibly) large part in chunks
+    async for data in part.stream():
+        # ...
 ```
 
 ## Stream the request body / receive upload
