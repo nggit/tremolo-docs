@@ -68,7 +68,7 @@ Login success!
 ```
 
 ## Multipart
-Tremolo multipart streaming is designed for receiving uploaded files in a memory-friendly manner.
+Tremolo multipart streaming is designed for receiving uploaded files in a memory-friendly manner. Unlike most implementations, it is purely in-memory with no spooled temporary files, lightweight and leaves it up to the devs to fully manage the chunks of data.
 
 You can *stream* multipart through the `request.files()` *async generator*. Each will return a dict object representing a file.
 
