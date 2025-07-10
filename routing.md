@@ -50,11 +50,79 @@ async def my_page(request, page_id=b'1', **server):
 {: .note }
 *regex*-based routing pattern will be compared against `request.url` not `request.path`, meaning the match involves also query string.
 
-## Custom 404 page
+## Class-based views
+From the beginning, Tremolo exclusively supports only `@app.route`.
+
+`@app.get`, `@app.post`, etc. are not implemented to prevent unnecessary lines of code or redundant API/methods.
+
+To compensate, As of [#300](https://github.com/nggit/tremolo/pull/300) `@app.route` supports decorating classes as well, so you can separate methods more cleanly.
+
+**OLD:**
+```python
+@app.route('/hello')
+async def hello_world(request, **server):
+    if request.method == b'GET':
+        return 'Hello, World!'
+
+    if request.method == b'POST':
+        return await request.body()
+
+    raise MethodNotAllowed
+```
+
+**NEW:**
+```python
+@app.route('/hello')
+class HelloWorld:
+    async def get(self, **server):
+        return 'Hello, World!'
+
+    async def post(self, request, **server):
+        return await request.body()
+
+```
+
+{: .note }
+If the method is not implemented, the request will fall on the default handler `405 Method Not Allowed`.
+
+## Passing arbitrary options
+Any arbitrary options in `@app.route(, **options)` or `app.add_route(, **options)` will be received in the CBV class, in `__init__(, **kwargs)`.
+
+This allows complex use cases.
+
+```python
+class HelloModel:
+    def get_message(self):
+        return 'Hello, clean architecture!'
+
+    def set_message(self, message):
+        self.msg = message
+
+
+@app.route('/hello', model=HelloModel)
+class HelloWorld:
+    def __init__(self, model, **kwargs):
+        self.model = model()
+
+    async def get(self, **server):
+        return self.model.get_message()
+
+    async def post(self, request, **server):
+        self.model.set_message(await request.body())
+        return 'OK'
+
+
+# reuse?
+app.add_route(HelloWorld, '/hello101', model=AnotherModel)
+
+```
+
+## Custom 40x page
+The handlers you may want to customize are `404`, `405`, and `500`. For 500, it will also receive an `exc` parameter.
+
 ```python
 @app.error(404)
 async def my_error_page(**server):
     return 'This is my custom 404 page.'
 
 ```
- 
