@@ -49,7 +49,7 @@ async def my_page(request, page_id=b'1', **server):
 ```
 
 {: .note }
-*regex*-based routing pattern will be compared against `request.url` not `request.path`, meaning the match involves also query string.
+*regex*-based routing pattern will be compared against `request.url` not `request.path`, meaning the match involves also query string. But for convenience, `$` can still match the end of `request.path`.
 
 ## Class-based views
 From the beginning, Tremolo exclusively supports only `@app.route`.
