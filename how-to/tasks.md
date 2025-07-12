@@ -45,7 +45,7 @@ A *Context* is a mutable object (think a `dict` with a dot notation, or a [Simpl
 There are three kinds of context, which are `WorkerContext`, `ConnectionContext` and `RequestContext`.
 
 ### 1. RequestContext
-`request.context` can be used to share state or data e.g. between [middleware](middleware.html) and [handler](handlers.html), in a lifetime of a request.
+`request.context` can be used to share state or data e.g. between [middleware](/tremolo-docs/basics/middleware.html) and [handler](/tremolo-docs/basics/handlers.html), in a lifetime of a request.
 
 ```python
 ctx = request.context

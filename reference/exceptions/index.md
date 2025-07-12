@@ -6,7 +6,7 @@ has_children: false
 has_toc: false
 ---
 
-You can raise an [HTTPException](https://github.com/nggit/tremolo/blob/main/tremolo/exceptions.py) inside [handlers](/tremolo-docs/handlers.html) or [middlewares](/tremolo-docs/middleware.html).
+You can raise an [HTTPException](https://github.com/nggit/tremolo/blob/main/tremolo/exceptions.py) inside [handlers](/tremolo-docs/basics/handlers.html) or [middlewares](/tremolo-docs/basics/middleware.html).
 
 Consider the following code:
 

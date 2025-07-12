@@ -4,7 +4,7 @@ title: Inter-process Synchronization
 parent: How-To
 ---
 
-When Tremolo HTTP server is configured with [worker_num](configuration.html#worker_num) > 1, it can be dangerous e.g. when you have code that writes to the same file.
+When Tremolo HTTP server is configured with [worker_num](/tremolo-docs/configuration.html#worker_num) > 1, it can be dangerous e.g. when you have code that writes to the same file.
 
 `server['lock']` can be used to tackle this problem.
 

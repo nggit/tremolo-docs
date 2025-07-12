@@ -27,4 +27,4 @@ The subsequent calls to it (inside `while chunk/True`) is really safe. Thanks to
 Internally, Tremolo will suspend each chunk / `yield` at some amount of time depending on the given speed setting.
 The lower speed setting given, the more chance for other coroutines to run.
 
-See also: [Synchronous handlers](/tremolo-docs/handlers.html#synchronous-handlers)
+See also: [Synchronous handlers](/tremolo-docs/basics/handlers.html#synchronous-handlers)

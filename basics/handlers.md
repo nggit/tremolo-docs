@@ -30,7 +30,7 @@ async def hello_world(request, response):
 
 Each handler is required to accept a *keyword arguments* in this case `**server`. Or on an individual basis like `request`, `response`, etc. (number and order have no effect).
 
-`server` is a dict object, which contains other objects that are often needed, such as `server['request']` which is an [HTTPRequest](https://nggit.github.io/tremolo-docs/request.html) object, and `server['response']` which is an [HTTPResponse](https://nggit.github.io/tremolo-docs/response.html) object.
+`server` is a dict object, which contains other objects that are often needed, such as `server['request']` which is an [HTTPRequest](/tremolo-docs/reference/request/) object, and `server['response']` which is an [HTTPResponse](/tremolo-docs/reference/response/) object.
 
 You can provide some options to fine tune the handler such as `chunked`, `rate`, `buffer_size`, etc.
 
@@ -114,7 +114,7 @@ async def my_handler(**server):
 
 ```
 
-Make sure you allow enough time for uploading cases. On downloads with [response.sendfile()](/tremolo-docs/resumable-downloads.html), there is no need to worry as browsers can generally re-request `Range`s that are still needed.
+Make sure you allow enough time for uploading cases. On downloads with [response.sendfile()](/tremolo-docs/how-to/resumable-downloads.html), there is no need to worry as browsers can generally re-request `Range`s that are still needed.
 
 ## Synchronous handlers
 The async paradigm may be painful for beginners or old school. Support for synchronous handlers was added in [#286](https://github.com/nggit/tremolo/pull/286) .

@@ -5,7 +5,7 @@ title: Headers and Cookies
 parent: Basics
 ---
 
-You can **get** Headers and Cookies with the [Request Object](https://nggit.github.io/tremolo-docs/request.html), and how to **set** it is by using the  [Response Object](https://nggit.github.io/tremolo-docs/response.html).
+You can **get** Headers and Cookies with the [Request Object](/tremolo-docs/reference/request/), and how to **set** it is by using the  [Response Object](/tremolo-docs/reference/response/).
 
 ## How to get cookies?
 
@@ -62,7 +62,7 @@ It then may return:
 
 There are two ways.
 
-First, using the `set_header` of the [Response Object](https://nggit.github.io/tremolo-docs/response.html):
+First, using the `set_header` of the [Response Object](/tremolo-docs/reference/response/):
 
 ```python
 

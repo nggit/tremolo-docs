@@ -10,7 +10,7 @@ In Tremolo, `yield` only accepts *bytes-like* objects like `bytes` or `bytearray
 Both `yield` and `return` are used to send the response body to the client. Each `yield` will usually be a [chunked HTTP response](https://en.wikipedia.org/wiki/Chunked_transfer_encoding).
 
 {: .note }
-Instead of using *return*, you can also use the *end()* method of the [Response object](response.html)
+Instead of using *return*, you can also use the *end()* method of the [Response object](/tremolo-docs/reference/response/)
 
 It will be faster than using `return` because it skips some logic. But only `bytes-like` objects are supported.
 
@@ -54,7 +54,7 @@ async def hello_world(request, stream=False):
 ![Tremolo yield stream=False](https://raw.githubusercontent.com/nggit/tremolo-docs/main/assets/images/tremolo-yield-stream-false.gif)
 
 ## Send RAW data
-In some cases you may want to send RAW data. You can use the `send()` method of the [Response object](response.html).
+In some cases you may want to send RAW data. You can use the `send()` method of the [Response object](/tremolo-docs/reference/response/).
 
 It's a lower-level method, which only supports `bytes-like` objects.
 

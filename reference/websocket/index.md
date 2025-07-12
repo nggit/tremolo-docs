@@ -8,7 +8,7 @@ has_toc: false
 
 Tremolo has a built-in, minimal implementation of [WebSocket](https://en.wikipedia.org/wiki/WebSocket).
 
-To enable WebSocket support for a [handler](/tremolo-docs/handlers.html), use the `websocket=None` placeholder as follows:
+To enable WebSocket support for a [handler](/tremolo-docs/basics/handlers.html), use the `websocket=None` placeholder as follows:
 
 ```python
 @app.route('/ws')
