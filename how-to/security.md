@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Security and Tips
+parent: How-To
 ---
 
 It should be noted that Tremolo does not validate HTTP requests by default.

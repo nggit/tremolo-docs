@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Resumable Downloads
+parent: How-To
 ---
 
 The key to getting static files resumable during download is to implement `Accept-Ranges`, `Content-Range` and related support.

@@ -2,6 +2,7 @@
 layout: page
 nav_order: 4
 title: Handlers
+parent: Basics
 ---
 
 A **route handler** or simply **handler** is a function that binds to a certain route. The following is a handler called `hello_world`, and it binds to a `/hello`.

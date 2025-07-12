@@ -2,6 +2,7 @@
 layout: page
 nav_order: 7
 title: Headers and Cookies
+parent: Basics
 ---
 
 You can **get** Headers and Cookies with the [Request Object](https://nggit.github.io/tremolo-docs/request.html), and how to **set** it is by using the  [Response Object](https://nggit.github.io/tremolo-docs/response.html).

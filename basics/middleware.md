@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Middleware
+parent: Basics
 ---
 
 Middleware is a layer that can *intercept* **requests** before they are processed by handlers, and **responses** before they are sent to the client/browser.

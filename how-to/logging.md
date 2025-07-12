@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Logging
+parent: How-To
 ---
 
 If you want to print your log messages, you can make use of `server['logger']` within [handlers](handlers.html) or [middlewares](middlewares.html).

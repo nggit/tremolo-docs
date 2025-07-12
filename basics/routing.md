@@ -2,6 +2,7 @@
 layout: page
 nav_order: 3
 title: Routing
+parent: Basics
 ---
 
 Tremolo uses only basic routing and built-in [re](https://docs.python.org/3/library/re.html) module. There are no difficult abstractions, and never will.

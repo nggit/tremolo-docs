@@ -2,6 +2,7 @@
 layout: page
 nav_order: 8
 title: Body and POST
+parent: Basics
 ---
 
 **POST** is one of the request methods that comes with a body. `POST` is usually used to send forms / upload data.
