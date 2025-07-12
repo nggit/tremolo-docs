@@ -20,7 +20,7 @@ The default is `True`.
 The default is `1`.
 
 ### thread_pool_size
-Number of executor threads per worker/process. Mainly used in [synchronous handlers](/tremolo-docs/handlers.html#synchronous-handlers) as well to assist [Inter-process Synchronization](/tremolo-docs/inter-process-sync.html#multiple-shared-resources).
+Number of executor threads per worker/process. Mainly used in [synchronous handlers](/tremolo-docs/basics/handlers.html#synchronous-handlers) as well to assist [Inter-process Synchronization](/tremolo-docs/how-to/inter-process-sync.html#multiple-shared-resources).
 
 The default is `5`.
 
@@ -78,7 +78,7 @@ The default is `1048576`, which means **1MiB/s** or **8.39Mbps**.
 
 If you want to increase the value too far from the default value, ideally you should also increase the *buffer_size* too.
 
-You can also apply download rate per [handler](handlers.html) using `rate`.
+You can also apply download rate per [handler](/tremolo-docs/basics/handlers.html) using `rate`.
 
 ### upload_rate
 Limits the upload / POST speed.
@@ -92,7 +92,7 @@ The default is `16384`, or **16KiB**.
 On write, the `buffer_size` value is also used to determine the watermark.
 With `buffer_size=16384`, the high value of the watermark will be 4x or **65536**, and the low value will be 0.5x or **8192**.
 
-You can also apply `buffer_size` in the [handler](handlers.html) or `response.write()`.
+You can also apply `buffer_size` in the [handler](/tremolo-docs/basics/handlers.html) or `response.write()`.
 
 In the case of `response.write()` (may be called multiple times), only the first is considered.
 
