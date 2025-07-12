@@ -25,6 +25,7 @@ After that being called (at least once), then the form data will also available 
 request.params.post
 ```
 
+{: .note }
 If the form type is `multipart/form-data`, which can be mixed with files, the files will be populated in `request.params.files`. For large upload needs, use [request.files()](/tremolo-docs/basics/body.html#multipart) instead.
 
 The request body will also be **cached**, allowing `request.body()` to be *awaited* afterwards.

@@ -9,8 +9,7 @@ In Tremolo, `yield` only accepts *bytes-like* objects like `bytes` or `bytearray
 
 Both `yield` and `return` are used to send the response body to the client. Each `yield` will usually be a [chunked HTTP response](https://en.wikipedia.org/wiki/Chunked_transfer_encoding).
 
-{: .note }
-Instead of using *return*, you can also use the *end()* method of the [Response object](/tremolo-docs/reference/response/)
+Instead of using *return*, you can also use the *end()* method of the [Response object](/tremolo-docs/reference/response/).
 
 It will be faster than using `return` because it skips some logic. But only `bytes-like` objects are supported.
 
