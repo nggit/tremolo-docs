@@ -88,6 +88,8 @@ async def hello_world(**server):
 If the handler returns something other than the above, such as `True`, the connection **will not be closed**.
 This assumes you will be managing the connection manually.
 
+Although you can use anything, always use `True` to avoid breakage in the future.
+
 You will see a log:
 ```
 handler hello_world has exited with the connection possibly left open
