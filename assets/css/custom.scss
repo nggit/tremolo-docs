@@ -1,0 +1,9 @@
+/* make the outer sidebar the only scrollable element */
+.side-bar {
+  overflow-y: auto;
+}
+
+#site-nav {
+  overflow-y: visible;
+  height: auto;
+}
