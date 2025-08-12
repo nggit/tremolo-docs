@@ -3,7 +3,10 @@
   overflow-y: auto;
 }
 
-#site-nav {
+.site-nav {
   overflow-y: visible;
-  height: auto;
+}
+
+.site-footer {
+  position: relative;
 }
