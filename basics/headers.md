@@ -27,10 +27,10 @@ print(
 )
 ```
 
-A *bytes-like* object will be returned:
+A *bytes-like* object will be returned inside a `list`:
 
 ```
-bytearray(b'a=123')
+[b'a=123']
 ```
 
 What if there are two cookies?
@@ -40,10 +40,10 @@ Cookie: a=123
 Cookie: a=xyz
 ```
 
-In this case a `list` object will be returned:
+In this case a `list` with two *bytes-like* will be returned:
 
 ```
-[bytearray(b'a=123'), bytearray(b'a=xyz')]
+[b'a=123', b'a=xyz']
 ```
 
 There is a better way to get cookies with:
