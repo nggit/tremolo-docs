@@ -63,17 +63,43 @@ Server: Tremolo
 Site down for maintenance
 ```
 
-## Custom HTTP Exceptions
-You can also create your custom `HTTPException`:
+## Handling/hooking exceptions
+Here is an example of how to *catch-all* exceptions in one handler:
 
+```python
+@app.error(400)  # internal BadRequest
+@app.error(404)  # internal NotFound
+@app.error(405)  # internal MethodNotAllowed (CBV)
+@app.error(500)
+async def all_error(exc, response, **server):
+    # response.set_status(exc.code, exc.message)
+    response.set_content_type('text/plain')
+    return str(exc)
+
+```
+
+Other/Custom exceptions like `ValueError` can be represented by `code` 500.
+
+### Note
+- Won't be executed when headers already sent
+- Only `return` str/bytes is supported, `yield` is not
+- Must accept `**server`/`**kwargs`
+- `exc` is an `HTTPException`, a *wrapped* exception rather than original.
+  Use `exc.__cause__` to access the original exception
+
+## Create and raise custom HTTPException
+Not all `HTTPException`s are defined by Tremolo. Only the common ones and those used internally, such as `Forbidden`, `BadRequest`, etc.
+
+But you can always create custom classes by subclassing `HTTPException`. And if they are raised, they will still be hookable via `@app.error(code)`, as long as they use a `code` in the range **400** - **511**.
+
+Here is the minimal form:
 ```python
 from tremolo.exceptions import HTTPException
 
-# ...
 
-raise HTTPException(
-    'Site down for maintenance',
-    code=503,
-    message='Under Maintenance'
-)
+class PaymentRequired(HTTPException):
+    code = 402
+    message = 'Payment Required'
+    content_type = 'text/html; charset=utf-8'  # optional
+
 ```
