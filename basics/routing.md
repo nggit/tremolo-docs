@@ -118,8 +118,8 @@ app.add_route(HelloWorld, '/hello101', model=AnotherModel)
 
 ```
 
-## Custom 40x page
-The handlers you may want to customize are `404`, `405`, and `500`. For 500, it will also receive an `exc` parameter.
+## Custom 40x/50x page
+You can hook all exceptions raised by the internal framework such as `NotFound`, as well as by user code.
 
 ```python
 @app.error(404)
@@ -127,3 +127,5 @@ async def my_error_page(**server):
     return 'This is my custom 404 page.'
 
 ```
+
+You can find more details about this in [the reference](/tremolo-docs/reference/exceptions/#handlinghooking-exceptions).
