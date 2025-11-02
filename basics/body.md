@@ -213,3 +213,6 @@ It will read **exactly** 150 bytes of the request body. When no more body can be
 If you pass `size=-1`, it literally means `next(stream())`, or it will read up to the maximum [buffer_size](https://nggit.github.io/tremolo-docs/configuration.html#buffer_size), typically **<= 16KiB**. To read the entire body use `await request.body()`.
 
 Note that `read()`, `body()` will also decode *chunked encoding*. `recv(size)`, `body(raw=True)` can be used instead for reading the request body as is.
+
+{: .note }
+HTTP `Keep-Alive` will be disabled if you do not consume the request body completely to avoid *desync*. You will see a log: `INFO: request body was not fully consumed`.
