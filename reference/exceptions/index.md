@@ -80,6 +80,16 @@ async def all_error(exc, response, **server):
 
 Other/Custom exceptions like `ValueError` can be represented by `code` 500.
 
+If you don't want to change the body, just return `None`. You still have the chance to modify `exc`:
+
+```python
+@app.error(500)
+async def all_error(exc, **server):
+    if exc.code == 403:
+        exc.content_type = 'text/plain'
+
+```
+
 ### Note
 - Won't be executed when headers already sent
 - Only `return` str/bytes is supported, `yield` is not
