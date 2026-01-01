@@ -19,6 +19,12 @@ The default is `True`.
 ### worker_num
 The default is `1`.
 
+In Tremolo, `--worker-num 1` or `worker_num=1` is not a true single-process mode. It will come with a supervisor. So 2 processes in total.
+
+Rather than using `1` like other server implementation, `0` is choosen for single-process, also means multi-worker disabled.
+
+And `-1` means use all availabe cpu core.
+
 ### thread_pool_size
 Number of executor threads per worker/process. Mainly used in [synchronous handlers](/tremolo-docs/basics/handlers.html#synchronous-handlers) as well to assist [Inter-process Synchronization](/tremolo-docs/how-to/inter-process-sync.html#multiple-shared-resources).
 
@@ -61,6 +67,15 @@ The default is `2 * 1048576`, or **2MiB**.
 
 ### log_level
 The default is `'DEBUG'` (string). For more info, please check [https://docs.python.org/3/library/logging.html#levels](https://docs.python.org/3/library/logging.html#levels).
+
+This is how *debug* and *log_level* options are related, and how they behave.
+
+| debug  | log_level  | Behaviour
+| ---------- | -------------- | ------------
+| not set | not set      | set `log_level='INFO'`
+| not set | `'DEBUG'` | set `log_level='DEBUG'`
+| `True`   | not set      | set `log_level='DEBUG'` + will also show a traceback
+| `True`   | `'INFO'`     | set `log_level='INFO'` + will also show a traceback
 
 ### log_fmt
 Python's log format. If empty defaults to `'%(message)s'`.
